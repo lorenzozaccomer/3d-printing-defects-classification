@@ -4,12 +4,11 @@ import cv2
 import os, sys
 
 # importing Functions from files
-import dirs
+from libs.dirs import *
  
 # extract the train valid folders
 path = 'D:\\repositories\\3d-printer-recognition\\Images'
-folders = dirs.ReturnImageFolderFromPath(path)
+folders = ReturnImageFolderFromPath(path)
 
-# show the folder inside Images folder
-print(folders)
+
 
