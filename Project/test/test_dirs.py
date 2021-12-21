@@ -1,5 +1,6 @@
 
 import os
+import cv2, torch, torchvision
 
 path = 'D:\\repositories\\3d-printer-recognition\\Images'
 
@@ -14,13 +15,20 @@ def test__ImageList(path):
         folder_list.append(os.path.join(path,f))
     return folder_list
 
+print("test_ImageList")
+print(test__ImageList(path))
+
 # Return the paths from primary folder
 def test__FoldersOnImageList(path):
     return list((os.path.join(path,f) for f in os.listdir(path)))
 
+print("test_ImageList")
+print(test__ImageList(path))
+
 def test__create_datasets(path):
     return {x: datasets.ImageFolder(os.path.join(data_dir, x),data_transforms[x])
                   for x in ['train', 'valid']}
+print(test__create_datasets(path))
 
 # show the folder inside Images folder
 print('test__ReturnImageFolderFromPath')
@@ -31,5 +39,3 @@ print(images_folder)
 print('test__FoldersOnImageList')
 list_path_folders = test__FoldersOnImageList(path)
 print(list_path_folders)
-
-print(test__create_datasets(path))
