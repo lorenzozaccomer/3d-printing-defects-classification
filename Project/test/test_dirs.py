@@ -25,11 +25,6 @@ def test__FoldersOnImageList(path):
 print("test_ImageList")
 print(test__ImageList(path))
 
-def test__create_datasets(path):
-    return {x: datasets.ImageFolder(os.path.join(data_dir, x),data_transforms[x])
-                  for x in ['train', 'valid']}
-print(test__create_datasets(path))
-
 # show the folder inside Images folder
 print('test__ReturnImageFolderFromPath')
 images_folder = test__ReturnImageFolderFromPath(path)
