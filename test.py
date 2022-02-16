@@ -4,7 +4,8 @@
 import cv2
   
 # path
-path = r'D:\geeks14.png'
+path = r'U:\repositories\3d-printer-recognition\Project\test\geeks14.png'
+#path = r'D:\NoDefects-0_jpg.rf.8df76f71bc232b121de110483cc6e24b.jpg'
   
 # Using cv2.imread() method
 img = cv2.imread(path)
