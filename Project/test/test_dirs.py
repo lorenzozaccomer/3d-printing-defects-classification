@@ -9,6 +9,8 @@ path = 'D:\\repositories\\3d-printer-recognition\\Images'
 def test__ReturnImageFolderFromPath(path):
     return os.listdir(path)
 
+
+
 # Test image list
 def test__ImageList(path):
     folder_list = []
@@ -20,20 +22,28 @@ def test__ImageList(path):
 def test__FoldersOnImageList(path):
     return list((os.path.join(path,f) for f in os.listdir(path)))
 
+
+
 def test__create_datasets(path):
     return {x: datasets.ImageFolder(os.path.join(path, x))
                   for x in ['train', 'valid']}
 
+
+def test__dim_datasets(path):
+    return {x: len(image_datasets[x]) for x in ['train', 'valid']}
+
 # show the folder inside Images folder
-print('test__ReturnImageFolderFromPath')
 images_folder = test__ReturnImageFolderFromPath(path)
 print(images_folder)
 
 # lists the folders on Image folder
-print('test__FoldersOnImageList')
 list_path_folders = test__FoldersOnImageList(path)
 print(list_path_folders)
 
 # create image dataset
-print('test__create_datasets')
-print(test__create_datasets(path))
+image_datasets = test__create_datasets(path)
+print(image_datasets)
+
+#return size of datasets
+dim_datasets = test__dim_datasets(path)
+print(dim_datasets)
