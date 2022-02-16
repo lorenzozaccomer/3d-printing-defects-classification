@@ -22,4 +22,3 @@ print(image_datasets)
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
 print(dataset_sizes)
 
-xyz
