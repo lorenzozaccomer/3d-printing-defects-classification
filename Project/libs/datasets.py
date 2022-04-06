@@ -24,7 +24,7 @@ data_transforms = {
 # FUNCTIONS
 
 def ShuffleDatasets(dataset, subs):
-    return {x: DataLoader(dataset[x], batch_size=4, num_workers=4, shuffle=True) for x in subs}
+    return {x: DataLoader(dataset[x], batch_size=4, shuffle=True) for x in subs}
 
 
 def ImagesDatasetFromFolders(path, subs):
