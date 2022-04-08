@@ -34,6 +34,11 @@ print(class_names)
 # Get 1 batch images
 inputs, classes = next(iter(dataloaders['train']))
 
+# Get a batch of training data
 out = torchvision.utils.make_grid(inputs)
 
+# Print 4 random images
 imshow(out, title=[class_names[x] for x in classes])
+
+print("ok")
+
