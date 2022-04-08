@@ -8,14 +8,14 @@ from torch.utils.data import DataLoader
 
 data_transforms = {
     'train': transforms.Compose([
-        transforms.RandomResizedCrop(224),
+        transforms.RandomResizedCrop(800),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
     'valid': transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
+        transforms.Resize(600),
+        #transforms.CenterCrop(224),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
@@ -24,6 +24,10 @@ data_transforms = {
 # FUNCTIONS
 
 def ShuffleDatasets(dataset, subs):
+    "This function takes the datasets and shuffle them"
+
+    """Not set num_workers because this settings can create compiling error,
+    so leave the default value"""
     return {x: DataLoader(dataset[x], batch_size=4, shuffle=True) for x in subs}
 
 
