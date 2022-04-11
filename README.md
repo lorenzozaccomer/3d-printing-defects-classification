@@ -1,1 +1,1 @@
-# 3d-printer-recognition
+# 3d-printer-defects-recognition
