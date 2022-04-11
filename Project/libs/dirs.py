@@ -30,7 +30,7 @@ def CheckCurrentPathAndExtractSubPaths(DesiredPath):
     """
     # On my computers I have 2 different paths
     #Path1 = 'U:\\repositories\\3d-printer-recognition\\Images'
-    Path2 = 'L:\\repositories\\3d-printer-recognition\\Images'
+    Path2 = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
     DefaultPath = ""
 
     DefaultPath = DesiredPath
