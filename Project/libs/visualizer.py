@@ -25,7 +25,7 @@ def imshow(inp, title=None):
     plt.pause(0.001)
 
 
-def visualize_model(model, num_images=6):
+def visualize_model(dataloaders, class_names, model, num_images=6):
     was_training = model.training
     model.eval()
     images_so_far = 0
