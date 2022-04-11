@@ -12,9 +12,11 @@ import os, sys
 from libs.dirs import *
 from libs.datasets import *
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-Path, Subpaths = CheckCurrentPathAndExtractSubPaths()
+DesiredPath = "U:\\repositories\\3d-printer-recognition\\Images"
+
+Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
 
 print(Path)
 print(Subpaths)
