@@ -13,10 +13,11 @@ from libs.dirs import *
 from libs.datasets import *
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
- 
-# extract the train-valid images folders
-Path = 'U:\\repositories\\3d-printer-recognition\\Images'
-Subpaths = ['train','valid']
+
+Path, Subpaths = CheckCurrentPathAndExtractSubPaths()
+
+print(Path)
+print(Subpaths)
 
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 #print(image_datasets)
