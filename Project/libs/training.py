@@ -4,9 +4,7 @@
 #
 ###
 
-import time
-import copy
-import torch
+import time, copy, torch
 
 from libs.constants import *
 
@@ -16,7 +14,7 @@ def train_model(dataloaders, dataset_sizes, subs, model, criterion, optimizer, s
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
-
+    
     for epoch in range(num_epochs):
         print(f'Epoch {epoch}/{num_epochs - 1}')
         print('-' * 10)
