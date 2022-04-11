@@ -3,16 +3,11 @@
 import cv2
 import torch, torchvision
 
-from torchvision import datasets
-
-# Standard Library
-import os, sys
-
 # importing Functions from files
 from libs.dirs import *
 from libs.datasets import *
-
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+from libs.training import *
+from libs.visualizer import *
 
 DesiredPath = "U:\\repositories\\3d-printer-recognition\\Images"
 
@@ -40,8 +35,13 @@ inputs, classes = next(iter(dataloaders['train']))
 # Get a batch of training data
 out = torchvision.utils.make_grid(inputs)
 
+print("printing..")
+
 # Print 4 random images
 imshow(out, title=[class_names[x] for x in classes])
 
-print("ok")
+print("end showing images..")
 
+generated_model = train_model(dataloaders, dataset_sizes, Subpaths)
+
+#visualize_model(generated_model)
