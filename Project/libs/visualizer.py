@@ -32,7 +32,7 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
     fig = plt.figure()
 
     with torch.no_grad():
-        for i, (inputs, labels) in enumerate(dataloaders['val']):
+        for i, (inputs, labels) in enumerate(dataloaders['valid']):
             inputs = inputs.to(device)
             labels = labels.to(device)
 
