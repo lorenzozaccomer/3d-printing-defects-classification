@@ -16,53 +16,58 @@ from libs.visualizer import *
 
 DesiredPath = "U:\\repositories\\3d-printer-recognition\\Images"
 
-Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
+def main():
 
-print(Path)
-print(Subpaths)
+    Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
 
-image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
-#print(image_datasets)
+    print(Path)
+    print(Subpaths)
 
-dataloaders = ShuffleDatasets(image_datasets, Subpaths)
-print(dataloaders)
+    image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
+    #print(image_datasets)
 
-dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
-print(dataset_sizes)
+    dataloaders = ShuffleDatasets(image_datasets, Subpaths)
+    #print(dataloaders)
 
-# Extract the class from one dataset (are equal between them)
-class_names = image_datasets['train'].classes
-print(class_names)
+    dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
+    print(dataset_sizes)
 
-# Get 1 batch images
-inputs, classes = next(iter(dataloaders['train']))
+    # Extract the class from one dataset (are equal between them)
+    class_names = image_datasets['train'].classes
+    #print(class_names)
 
-# Get a batch of training data
-out = torchvision.utils.make_grid(inputs)
+    # Get 1 batch images
+    inputs, classes = next(iter(dataloaders['train']))
 
-print("printing..")
+    # Get a batch of training data
+    out = torchvision.utils.make_grid(inputs)
 
-# Print 4 random images
-imshow(out, title=[class_names[x] for x in classes])
+    print("printing..")
 
-print("end showing images..")
+    # Print 4 random images
+    imshow(out, title=[class_names[x] for x in classes])
 
-model_ft = models.resnet18(pretrained=True)
-num_ftrs = model_ft.fc.in_features
-# Here the size of each output sample is set to 2.
-# Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-model_ft.fc = nn.Linear(num_ftrs, 2)
+    print("end showing images..")
 
-model_ft = model_ft.to(device)
+    model_ft = models.resnet18(pretrained=True)
+    num_ftrs = model_ft.fc.in_features
+    # Here the size of each output sample is set to 2.
+    # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
+    model_ft.fc = nn.Linear(num_ftrs, 2)
 
-criterion = nn.CrossEntropyLoss()
+    model_ft = model_ft.to(device)
 
-# Observe that all parameters are being optimized
-optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
+    criterion = nn.CrossEntropyLoss()
 
-# Decay LR by a factor of 0.1 every 7 epochs
-exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
+    # Observe that all parameters are being optimized
+    optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 
-generated_model = train_model(dataloaders, dataset_sizes, Subpaths, model_ft, criterion, optimizer_ft, exp_lr_scheduler)
+    # Decay LR by a factor of 0.1 every 7 epochs
+    exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
-visualize_model(dataloaders, class_names, generated_model)
+    generated_model = train_model(dataloaders, dataset_sizes, Subpaths, model_ft, criterion, optimizer_ft, exp_lr_scheduler)
+
+    visualize_model(dataloaders, class_names, generated_model)
+
+if __name__ == '__main__':
+    main()
