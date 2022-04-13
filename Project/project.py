@@ -65,9 +65,12 @@ def main():
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
-    generated_model = train_model(dataloaders, dataset_sizes, Subpaths, model_ft, criterion, optimizer_ft, exp_lr_scheduler)
+    generated_model = train_model(dataloaders, dataset_sizes, Subpaths, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=2)
 
     visualize_model(dataloaders, class_names, generated_model)
+
+    plt.ioff()
+    plt.show()
 
 if __name__ == '__main__':
     main()
