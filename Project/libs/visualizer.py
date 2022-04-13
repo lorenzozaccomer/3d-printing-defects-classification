@@ -31,6 +31,10 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
     images_so_far = 0
     fig = plt.figure()
 
+    if(num_images < 2):
+        print("choose another num_images value!")
+        exit()
+
     with torch.no_grad():
         for i, (inputs, labels) in enumerate(dataloaders['valid']):
             inputs = inputs.to(device)
@@ -42,7 +46,7 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
             for j in range(inputs.size()[0]):
                 images_so_far += 1
                 ax = plt.subplot(num_images//2, 2, images_so_far)
-                ax.axis('off')
+                ax.axis('on')
                 ax.set_title(f'predicted: {class_names[preds[j]]}')
                 imshow(inputs.cpu().data[j])
 
@@ -50,6 +54,7 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
                     model.train(mode=was_training)
                     return
         model.train(mode=was_training)
+
 
 def generate_batch_images(dataloaders, class_names):
 
