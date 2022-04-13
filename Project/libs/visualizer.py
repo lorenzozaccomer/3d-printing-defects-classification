@@ -5,7 +5,7 @@
 #
 ###
 
-import torch
+import torch, torchvision
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -50,3 +50,22 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
                     model.train(mode=was_training)
                     return
         model.train(mode=was_training)
+
+def generate_batch_images(dataloaders, class_names):
+
+    # Get 1 batch images
+    inputs, classes = next(iter(dataloaders['train']))
+
+    # Get a batch of training data
+    out = torchvision.utils.make_grid(inputs)
+
+    print("printing..")
+
+    # Print 4 random images
+    imshow(out, title=[class_names[x] for x in classes])
+
+    print("end showing images..")
+
+
+if __name__ == '__main__':
+    generate_batch_images()
