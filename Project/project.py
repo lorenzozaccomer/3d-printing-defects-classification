@@ -55,7 +55,7 @@ exp_lr_scheduler = optim.lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.
 
 generated_model = train_model(dataloaders, dataset_sizes, Subpaths, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=2)
 
-visualize_model(dataloaders, class_names, generated_model)
+visualize_model(dataloaders, class_names, generated_model, num_images=2)
 
 plt.ioff()
 plt.show()
