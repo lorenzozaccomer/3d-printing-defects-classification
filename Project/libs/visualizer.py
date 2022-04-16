@@ -26,14 +26,8 @@ def imshow(inp, title=None):
 
 
 def visualize_model(dataloaders, class_names, model, num_images=6):
-    was_training = model.training
-    model.eval()
     images_so_far = 0
     fig = plt.figure()
-
-    if(num_images < 2):
-        print("choose another num_images value!")
-        exit()
 
     with torch.no_grad():
         for i, (inputs, labels) in enumerate(dataloaders['valid']):
@@ -46,30 +40,28 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
             for j in range(inputs.size()[0]):
                 images_so_far += 1
                 ax = plt.subplot(num_images//2, 2, images_so_far)
-                ax.axis('on')
+                ax.axis('off')
                 ax.set_title(f'predicted: {class_names[preds[j]]}')
                 imshow(inputs.cpu().data[j])
 
                 if images_so_far == num_images:
-                    model.train(mode=was_training)
                     return
-        model.train(mode=was_training)
 
 
-def generate_batch_images(dataloaders, class_names):
+def generate_batch_images(dataloaders, class_names, subs):
 
     # Get 1 batch images
-    inputs, classes = next(iter(dataloaders['train']))
+    inputs, classes = next(iter(dataloaders[subs]))
 
     # Get a batch of training data
     out = torchvision.utils.make_grid(inputs)
 
-    print("printing..")
+    #print("printing..")
 
     # Print 4 random images
     imshow(out, title=[class_names[x] for x in classes])
 
-    print("end showing images..")
+    #print("end showing images..")
 
 
 if __name__ == '__main__':
