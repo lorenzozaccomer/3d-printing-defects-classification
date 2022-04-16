@@ -8,19 +8,18 @@ import time, copy, torch
 
 from libs.constants import *
 
-def train_model(dataloaders, dataset_sizes, subs, model, criterion, optimizer, scheduler, num_epochs=25):
-
+def train_model(dataloaders, dataset_sizes, model, criterion, optimizer, scheduler, num_epochs=25):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
-    
+
     for epoch in range(num_epochs):
         print(f'Epoch {epoch}/{num_epochs - 1}')
         print('-' * 10)
 
         # Each epoch has a training and validation phase
-        for phase in subs:
+        for phase in ['train', 'valid']:
             if phase == 'train':
                 model.train()  # Set model to training mode
             else:
