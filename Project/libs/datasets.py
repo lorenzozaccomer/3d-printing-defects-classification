@@ -31,7 +31,7 @@ def ShuffleDatasets(dataset, subs):
 
     """Not set num_workers because this settings can create compiling error,
     so leave the default value"""
-    return {x: DataLoader(dataset[x], batch_size=4, shuffle=True, num_workers=4) for x in subs}
+    return {x: DataLoader(dataset[x], batch_size=4, shuffle=True) for x in subs}
 
 
 def ImagesDatasetFromFolders(path, subs):
