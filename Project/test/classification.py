@@ -15,20 +15,23 @@ transform = transforms.Compose([
     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
  ])
 
+PATH = './generated_model.pth'
 
 img = Image.open("L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\3.jpg")
+
+#img.show()
 
 img_t = transform(img)
 batch_t = torch.unsqueeze(img_t, 0)
 
 # Load alexnet model
-alexnet = torch.load('./generated_model.pth')
+evaluation_model = torch.load(PATH)
 
 # Put our model in eval mode
-alexnet.eval()
+evaluation_model.eval()
 
 # Carry out inference
-out = alexnet(batch_t)
+out = evaluation_model(batch_t)
 print(out.shape)
 
 # Load labels
