@@ -34,9 +34,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim import lr_scheduler
 import torch.backends.cudnn as cudnn
-from torchvision import datasets, models, transforms
+from torchvision import models
 import matplotlib.pyplot as plt
-import os
 
 from test_training import *
 from test_visualizer import *
@@ -128,6 +127,9 @@ exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
 model_ft = train_model(dataloaders, dataset_sizes,model_ft, criterion, optimizer_ft, exp_lr_scheduler,
                        num_epochs=1)
+
+PATH = './model_ft.pth'
+torch.save(model_ft, PATH)
 
 ######################################################################
 #
