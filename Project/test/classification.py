@@ -40,5 +40,5 @@ with open('L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\
 values, indices = torch.max(out,1)
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
-for index in indices[0][:2]:
+for index in indices[:2]:
   print((classes[index], percentage[index].item()))
