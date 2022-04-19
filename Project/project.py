@@ -40,10 +40,17 @@ class_names = image_datasets['train'].classes
 
 #generate_batch_images(mixed_datasets['train'],class_names)
 
+
+
+PATH = './model_ft.pth'
 iteration = 1 #skip model generation
 model_visualization = 0 #skip visualize_model
 
+
+
 if iteration == 0: # I want to generate a model
+
+    print("model generation ..")
 
     model_ft = models.resnet50(pretrained=True)
 
@@ -68,11 +75,13 @@ if iteration == 0: # I want to generate a model
     starting_time = time.time()
     generated_model = train_model(mixed_datasets, dataset_sizes, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=2)
     print('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
+    
+    print("saving the model ..")
+    torch.save(generated_model, PATH)
+    print("saved!")
+    
     if(model_visualization == 0): # only model geneartion
         exit()
-else:   # loads a previously generated model
-    PATH = './model_ft.pth'
-    loaded_model = torch.load(PATH)
 
 if(model_visualization == 1):
     visualize_model(mixed_datasets, class_names, generated_model)
@@ -80,16 +89,23 @@ if(model_visualization == 1):
     plt.show()
 
 if iteration == 1:
+    print("model loading ..")
+    
+    loaded_model = torch.load(PATH)
+    
     images, labels = next(iter(mixed_datasets['valid']))
-
+    
     # print images
     imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
 
     outputs = loaded_model(images)
+    labels = torch.tensor(labels)
 
     _, predicted = torch.max(outputs, 1)
 
-    print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(4)))
+    percentage = torch.nn.Softmax(outputs, dim=1)[0] * 100
+
+    print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(4)))
 
     plt.ioff()
     plt.show()
