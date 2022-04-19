@@ -48,20 +48,13 @@ def visualize_model(dataloaders, class_names, model, num_images=6):
                     return
 
 
-def generate_batch_images(dataloaders, class_names, subs):
+def generate_batch_images(showed_dataset, class_names):
 
     # Get 1 batch images
-    inputs, classes = next(iter(dataloaders[subs]))
+    inputs, classes = next(iter(showed_dataset))
 
-    # Get a batch of training data
-    out = torchvision.utils.make_grid(inputs)
-
-    #print("printing..")
-
-    # Print 4 random images
-    imshow(out, title=[class_names[x] for x in classes])
-
-    #print("end showing images..")
+    # Print random images
+    imshow(torchvision.utils.make_grid(inputs), title=[class_names[x] for x in classes])
 
 
 if __name__ == '__main__':
