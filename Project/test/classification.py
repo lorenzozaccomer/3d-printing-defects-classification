@@ -37,9 +37,8 @@ print(out.shape)
 with open('L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\3d_classes.txt') as f:
   classes = [line.strip() for line in f.readlines()]
 
-values, indices = torch.sort(out, descending=True)
+values, indices = torch.max(out,1)
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
 for index in indices[0][:2]:
   print((classes[index], percentage[index].item()))
-
