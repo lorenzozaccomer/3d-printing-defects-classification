@@ -35,7 +35,9 @@ print(out.shape)
 with open('L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\imagenet_classes.txt') as f:
   classes = [line.strip() for line in f.readlines()]
 
-_, index = torch.max(out, 1)
+values, indices = torch.sort(out, descending=True)
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
-print(classes[index[0]], percentage[index[0]].item())
+
+for index in indices[0][:10]:
+  print((classes[index], percentage[index].item()))
 
