@@ -25,33 +25,27 @@ def imshow(inp, title=None):
     plt.pause(0.001)
 
 
-def visualize_model(dataloaders, class_names, model, num_images=6):
+def visualize_model(loaded_dataset, class_names, model):
     images_so_far = 0
     fig = plt.figure()
 
     with torch.no_grad():
-        for i, (inputs, labels) in enumerate(dataloaders['valid']):
-            inputs = inputs.to(device)
-            labels = labels.to(device)
+        images, labels = next(iter(loaded_dataset['valid']))
 
-            outputs = model(inputs)
-            _, preds = torch.max(outputs, 1)
+        # print images
+        imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
 
-            for j in range(inputs.size()[0]):
-                images_so_far += 1
-                ax = plt.subplot(num_images//2, 2, images_so_far)
-                ax.axis('off')
-                ax.set_title(f'predicted: {class_names[preds[j]]}')
-                imshow(inputs.cpu().data[j])
+        outputs = model(images)
 
-                if images_so_far == num_images:
-                    return
+        _, predicted = torch.max(outputs, 1)
+
+        print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(4)))           
 
 
-def generate_batch_images(showed_dataset, class_names):
+def generate_batch_images(input_dataset, class_names):
 
     # Get 1 batch images
-    inputs, classes = next(iter(showed_dataset))
+    inputs, classes = next(iter(input_dataset))
 
     # Print random images
     imshow(torchvision.utils.make_grid(inputs), title=[class_names[x] for x in classes])
