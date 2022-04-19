@@ -90,6 +90,8 @@ if(model_visualization == 1):
 
 if iteration == 1:
     print("model loading ..")
+
+    total = correct = 0
     
     loaded_model = torch.load(PATH)
     
@@ -102,6 +104,11 @@ if iteration == 1:
     labels = torch.tensor(labels)
 
     _, predicted = torch.max(outputs, 1)
+
+    total += labels.size(0)
+    correct += (predicted == labels).sum().item()
+          
+    print('Test Accuracy of the model: {} %'.format(100 * correct / total))
 
     print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
 
