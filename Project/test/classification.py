@@ -5,7 +5,6 @@ from numpy import indices
 
 import torch
 from torchvision import transforms
-from matplotlib.pyplot import imshow
 
 transform = transforms.Compose([
     transforms.Resize(256),
@@ -15,9 +14,9 @@ transform = transforms.Compose([
     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
  ])
 
-PATH = './generated_model.pth'
+PATH = './model_ft.pth'
 
-img = Image.open("L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\3.jpg")
+img = Image.open("L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\6.jpg")
 
 #img.show()
 
