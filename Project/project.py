@@ -1,6 +1,5 @@
 
 # Libraries
-import cv2
 import torch
 
 import torch.nn as nn
@@ -21,7 +20,7 @@ plt.ion()   # interactive mode
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-DesiredPath = "U:\\repositories\\3d-printer-recognition\\Images"
+DesiredPath = "L:\\repositories\\3d-printer-recognition\\Images"
 
 Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
 
@@ -30,7 +29,8 @@ print(Subpaths)
 
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
-dataloaders = ShuffleDatasets(image_datasets, Subpaths)
+mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
+print(len(mixed_datasets['train']))
 
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
 print(dataset_sizes)
@@ -38,37 +38,58 @@ print(dataset_sizes)
 # # Extract the class from one dataset (are equal between them)
 class_names = image_datasets['train'].classes
 
-#generate_batch_images(dataloaders,class_names, 'train')
+#generate_batch_images(mixed_datasets['train'],class_names)
 
-model_ft = models.resnet18(pretrained=True)
+iteration = 1 #skip model generation
+model_visualization = 0 #skip visualize_model
 
-for param in model_ft.parameters():
-    param.requires_grad = False
+if iteration == 0: # I want to generate a model
 
-num_ftrs = model_ft.fc.in_features
-# Here the size of each output sample is set to 2.
-# Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-model_ft.fc = nn.Linear(num_ftrs, 2)
+    model_ft = models.resnet50(pretrained=True)
 
-model_ft = model_ft.to(device)
+    for param in model_ft.parameters():
+        param.requires_grad = False
 
-criterion = nn.CrossEntropyLoss()
+    num_ftrs = model_ft.fc.in_features
+    # Here the size of each output sample is set to 2.
+    # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
+    model_ft.fc = nn.Linear(num_ftrs, 2)
 
-# Observe that all parameters are being optimized
-optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
+    model_ft = model_ft.to(device)
 
-# Decay LR by a factor of 0.1 every 7 epochs
-exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
+    criterion = nn.CrossEntropyLoss()
 
-generated_model = train_model(dataloaders, dataset_sizes, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=1)
+    # Observe that all parameters are being optimized
+    optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 
-visualize_model(dataloaders, class_names, generated_model)
+    # Decay LR by a factor of 0.1 every 7 epochs
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
-plt.ioff()
-plt.show()
+    starting_time = time.time()
+    generated_model = train_model(mixed_datasets, dataset_sizes, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=2)
+    print('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
+    if(model_visualization == 0): # only model geneartion
+        exit()
+else:   # loads a previously generated model
+    PATH = './model_ft.pth'
+    loaded_model = torch.load(PATH)
 
-def save_model(model, optimizer):
-    checkpoint = {'state_dict' : model.state_dict(), 'optimizer' : optimizer.state_dict()}
-    torch.save(checkpoint, './alexnet_extractor_model.pth')
+if(model_visualization == 1):
+    visualize_model(mixed_datasets, class_names, generated_model)
+    plt.ioff()
+    plt.show()
 
-save_model(generated_model, optimizer_ft)
+if iteration == 1:
+    images, labels = next(iter(mixed_datasets['valid']))
+
+    # print images
+    imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
+
+    outputs = loaded_model(images)
+
+    _, predicted = torch.max(outputs, 1)
+
+    print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(4)))
+
+    plt.ioff()
+    plt.show()
