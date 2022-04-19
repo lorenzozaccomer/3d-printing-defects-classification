@@ -103,9 +103,7 @@ if iteration == 1:
 
     _, predicted = torch.max(outputs, 1)
 
-    percentage = torch.nn.Softmax(outputs, dim=1)[0] * 100
-
-    print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(4)))
+    print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
 
     plt.ioff()
     plt.show()

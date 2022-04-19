@@ -39,7 +39,7 @@ def visualize_model(loaded_dataset, class_names, model):
 
         _, predicted = torch.max(outputs, 1)
 
-        print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(4)))           
+        print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))           
 
 
 def generate_batch_images(input_dataset, class_names):
