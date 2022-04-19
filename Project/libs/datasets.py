@@ -9,7 +9,7 @@ import os
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
-data_transforms = {
+dataset_transformation = {
     'train': transforms.Compose([
         transforms.RandomResizedCrop(224),
         transforms.RandomHorizontalFlip(),
@@ -39,7 +39,7 @@ def ImagesDatasetFromFolders(path, subs):
     Will create 2 dataset, one from train folder
     and one from valid folder
     '''
-    return {x: datasets.ImageFolder(os.path.join(path, x), data_transforms[x]) for x in subs}
+    return {x: datasets.ImageFolder(os.path.join(path, x), dataset_transformation[x]) for x in subs}
 
 
 def ImagesDatasetSize(dataset, subs):
