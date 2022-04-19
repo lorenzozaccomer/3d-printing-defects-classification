@@ -47,4 +47,8 @@ def CheckCurrentPathAndExtractSubPaths(DesiredPath):
         print("path error! check it")
         exit()
 
+    if not(os.listdir(DefaultPath)):
+        print("not directories on this path")
+        exit()
+
     return DefaultPath, os.listdir(DefaultPath)
