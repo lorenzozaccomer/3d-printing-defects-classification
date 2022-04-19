@@ -14,31 +14,32 @@ transform = transforms.Compose([
     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
  ])
 
-PATH = './model_ft.pth'
+PATH_MODEL = './model_ft.pth'
+PATH_IMAGE = """L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\5.jpg"""
+classes = ['NoDefects', 'YesDefects']
 
-img = Image.open("L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\6.jpg")
-
-#img.show()
-
-img_t = transform(img)
-batch_t = torch.unsqueeze(img_t, 0)
-
-# Load alexnet model
-evaluation_model = torch.load(PATH)
-
-# Put our model in eval mode
+# Load model
+evaluation_model = torch.load(PATH_MODEL)
 evaluation_model.eval()
 
+#Load image
+img = Image.open(PATH_IMAGE)
+#img.show()
+image = transform(img)
+image = image.unsqueeze(0)
+
 # Carry out inference
-out = evaluation_model(batch_t)
+out = evaluation_model(image)
 print(out.shape)
 
-# Load labels
-with open('L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\3d_classes.txt') as f:
-  classes = [line.strip() for line in f.readlines()]
+classes = ['NoDefects', 'YesDefects']
 
-values, indices = torch.max(out,1)
+_, indices = torch.max(out,1)
+
+print(indices.item())
+
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
-for index in indices[:2]:
-  print((classes[index], percentage[index].item()))
+print(percentage)
+
+print(classes[indices.item()], percentage[indices].item())
