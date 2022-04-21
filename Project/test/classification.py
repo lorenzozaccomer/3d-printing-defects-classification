@@ -30,7 +30,6 @@ evaluation_model.eval()
 #Load image
 img = Image.open(PATH_IMAGE)
 image = transform(img)
-imshow(image)
 
 
 # Carry out inference
@@ -42,6 +41,8 @@ _, indices = torch.max(out,1)
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
 print(classes[indices.item()], percentage[indices].item())
+
+imshow(image, "Prediction: " + classes[indices.item()] + " " + str(percentage[indices].item()))
 
 plt.ioff()
 plt.show()
