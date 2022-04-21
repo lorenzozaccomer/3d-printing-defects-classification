@@ -30,22 +30,18 @@ evaluation_model.eval()
 #Load image
 img = Image.open(PATH_IMAGE)
 image = transform(img)
-imshow(image.unsqueeze(0))
+imshow(image)
 
 
 # Carry out inference
 tensor_image = image.unsqueeze(0)
 out = evaluation_model(tensor_image)
-#print(out.shape)
-
-classes = ['NoDefects', 'YesDefects']
 
 _, indices = torch.max(out,1)
 
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
 print(classes[indices.item()], percentage[indices].item())
-
 
 plt.ioff()
 plt.show()
