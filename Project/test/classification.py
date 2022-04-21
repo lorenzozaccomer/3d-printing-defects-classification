@@ -19,7 +19,7 @@ transform = transforms.Compose([
     mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
  ])
 
-PATH_MODEL = './model_ft.pth'
+PATH_MODEL = './generated_model.pth'
 PATH_IMAGE = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\5.jpg"
 classes = ['NoDefects', 'YesDefects']
 
