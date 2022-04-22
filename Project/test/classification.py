@@ -20,7 +20,7 @@ transform = transforms.Compose([
  ])
 
 PATH_MODEL = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
-PATH_IMAGE = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\8.jpg"
+PATH_IMAGE = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
 classes = ['NoDefects', 'YesDefects']
 
 # Load model
@@ -39,7 +39,9 @@ _, indices = torch.max(out,1)
 
 percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
 
-imshow(image, "Prediction: " + classes[indices.item()] + " " + str(percentage[indices].item()))
+prediction_text = "Prediction: " + classes[indices.item()] + " " + str(percentage[indices].item())
+
+imshow(image, prediction_text)
 
 plt.ioff()
 plt.show()
