@@ -4,6 +4,7 @@
 #
 ###
 
+import logging
 import time, copy, torch
 
 from libs.constants import *
@@ -15,8 +16,8 @@ def train_model(dataloaders, dataset_sizes, model, criterion, optimizer, schedul
     best_acc = 0.0
 
     for epoch in range(num_epochs):
-        print(f'Epoch {epoch}/{num_epochs - 1}')
-        print('-' * 10)
+        logging.info(f'Epoch {epoch}/{num_epochs - 1}')
+        logging.info('-' * 10)
 
         # Each epoch has a training and validation phase
         for phase in ['train', 'valid']:
@@ -57,18 +58,18 @@ def train_model(dataloaders, dataset_sizes, model, criterion, optimizer, schedul
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
-            print(f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
+            logging.info(f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
 
             # deep copy the model
             if phase == 'valid' and epoch_acc > best_acc:
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
 
-        print()
+        logging.info()
 
     time_elapsed = time.time() - since
-    print(f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
-    print(f'Best val Acc: {best_acc:4f}')
+    logging.info(f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
+    logging.info(f'Best val Acc: {best_acc:4f}')
 
     # load best model weights
     model.load_state_dict(best_model_wts)
