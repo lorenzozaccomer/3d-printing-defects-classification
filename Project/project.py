@@ -1,6 +1,7 @@
 
 # Libraries
 import torch
+import logging
 
 import torch.nn as nn
 import torch.optim as optim
@@ -18,27 +19,31 @@ from libs.visualizer import *
 cudnn.benchmark = True
 plt.ion()   # interactive mode
 
+logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger('matplotlib.font_manager').disabled = True
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 DesiredPath = "L:\\repositories\\3d-printer-recognition\\Images"
 
 Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
 
-#print(Path)
-#print(Subpaths)
+logging.info("-----------   NEW EXECUTION  -----------")
+logging.info("Path: " + Path)
+logging.info("Subpaths: " + str(Subpaths))
 
 PATH = './generated_model.pth'
-iteration = 1 #skip model generation
-model_visualization = 0 #skip visualize_model
-
+iteration = 0 #skip model generation
+model_visualization = 1 #skip visualize_model
 
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
 mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
-#print(len(mixed_datasets['train']))
+logging.debug("len(mixed_datasets['train']): " + str(len(mixed_datasets['train'])))
+logging.debug("len(mixed_datasets['valid']): " + str(len(mixed_datasets['valid'])))
 
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
-#print(dataset_sizes)
+logging.debug("dataset_sizes: " + str(dataset_sizes))
 
 # Extract the class from one dataset (are equal between them)
 class_names = image_datasets['train'].classes
@@ -46,9 +51,10 @@ class_names = image_datasets['train'].classes
 #generate_batch_images(mixed_datasets['train'],class_names)
 
 if iteration == 0: # I want to generate a model
-    print("loading model generation ..")
 
-    model_ft = models.resnet18(pretrained=True)
+    logging.info("loading model generation ..")
+
+    model_ft = models.resnet50(pretrained=True)
 
     for param in model_ft.parameters():
         param.requires_grad = False
@@ -56,7 +62,7 @@ if iteration == 0: # I want to generate a model
     num_ftrs = model_ft.fc.in_features
     # Here the size of each output sample is set to 2.
     # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-    model_ft.fc = nn.Linear(num_ftrs, 2)
+    model_ft.fc = nn.Linear(num_ftrs, len(class_names))
 
     model_ft = model_ft.to(device)
 
@@ -70,11 +76,11 @@ if iteration == 0: # I want to generate a model
 
     starting_time = time.time()
     generated_model = train_model(mixed_datasets, dataset_sizes, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=2)
-    print('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
+    logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
     
-    print("saving the model ..")
+    logging.info("saving the model ..")
     torch.save(generated_model, PATH)
-    print("model saved!")
+    logging.info("model saved!")
     
     if(model_visualization == 0): # only model generation
         exit()
@@ -84,8 +90,8 @@ if iteration == 0: # I want to generate a model
         plt.show()
 
 else:
-    print("skipped a new model generation ..")
-    print("default model loading ..")
+    logging.info("skipped a new model generation ..")
+    logging.info("default model loading ..")
 
     total = correct = 0
     
@@ -106,7 +112,12 @@ else:
     accuracy_text = 'Prediction accuracy: {} %'.format(100 * correct / total)
 
     prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
-
+    
+    logging.info(label_text)
+    logging.info(predicted_text)
+    logging.info(accuracy_text)
+    logging.info("show prediction images ..")
+    
     imshow(torchvision.utils.make_grid(images), prediction_text)
 
     plt.ioff()
