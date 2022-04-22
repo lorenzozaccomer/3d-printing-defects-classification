@@ -40,13 +40,15 @@ def visualize_model(loaded_dataset, class_names, model):
         print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))           
 
 
-def generate_batch_images(input_dataset, class_names):
+def generate_batch_images(input_dataset, labels):
 
     # Get 1 batch images
     inputs, classes = next(iter(input_dataset))
 
+    label_text = 'Label: ' + ' '.join('%s' % labels[x] for x in classes)
+
     # Print random images
-    imshow(torchvision.utils.make_grid(inputs), title=[class_names[x] for x in classes])
+    imshow(torchvision.utils.make_grid(inputs), label_text)
 
 
 if __name__ == '__main__':
