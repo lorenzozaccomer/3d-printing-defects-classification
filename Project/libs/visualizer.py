@@ -26,8 +26,6 @@ def imshow(inp, title=None):
 
 
 def visualize_model(loaded_dataset, class_names, model):
-    images_so_far = 0
-    fig = plt.figure()
 
     with torch.no_grad():
         images, labels = next(iter(loaded_dataset['valid']))
