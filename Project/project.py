@@ -24,8 +24,13 @@ DesiredPath = "L:\\repositories\\3d-printer-recognition\\Images"
 
 Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
 
-print(Path)
-print(Subpaths)
+#print(Path)
+#print(Subpaths)
+
+PATH = './generated_model.pth'
+iteration = 1 #skip model generation
+model_visualization = 0 #skip visualize_model
+
 
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
@@ -33,24 +38,15 @@ mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
 print(len(mixed_datasets['train']))
 
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
-print(dataset_sizes)
+#print(dataset_sizes)
 
-# # Extract the class from one dataset (are equal between them)
+# Extract the class from one dataset (are equal between them)
 class_names = image_datasets['train'].classes
 
 #generate_batch_images(mixed_datasets['train'],class_names)
 
-
-
-PATH = './model_ft.pth'
-iteration = 1 #skip model generation
-model_visualization = 0 #skip visualize_model
-
-
-
 if iteration == 0: # I want to generate a model
-
-    print("model generation ..")
+    print("loading model generation ..")
 
     model_ft = models.resnet50(pretrained=True)
 
@@ -78,18 +74,18 @@ if iteration == 0: # I want to generate a model
     
     print("saving the model ..")
     torch.save(generated_model, PATH)
-    print("saved!")
+    print("model saved!")
     
     if(model_visualization == 0): # only model geneartion
         exit()
+    else:
+        visualize_model(mixed_datasets, class_names, generated_model)
+        plt.ioff()
+        plt.show()
 
-if(model_visualization == 1):
-    visualize_model(mixed_datasets, class_names, generated_model)
-    plt.ioff()
-    plt.show()
-
-if iteration == 1:
-    print("model loading ..")
+else:
+    print("skipped a new model generation ..")
+    print("default model loading ..")
 
     total = correct = 0
     
@@ -98,10 +94,10 @@ if iteration == 1:
     images, labels = next(iter(mixed_datasets['valid']))
     
     # print images
-    imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
+    #imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
 
     outputs = loaded_model(images)
-    labels = torch.tensor(labels)
+    #labels = torch.tensor(labels)
 
     _, predicted = torch.max(outputs, 1)
 
@@ -110,6 +106,10 @@ if iteration == 1:
           
     print('Test Accuracy of the model: {} %'.format(100 * correct / total))
 
+    # print images
+    label_text = 'Label: ' + str([class_names[x] for x in labels])
+    predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
+    imshow(torchvision.utils.make_grid(images), label_text + '\n' + predicted_text)
     print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
 
     plt.ioff()
