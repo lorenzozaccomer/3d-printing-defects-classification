@@ -48,7 +48,7 @@ class_names = image_datasets['train'].classes
 if iteration == 0: # I want to generate a model
     print("loading model generation ..")
 
-    model_ft = models.resnet50(pretrained=True)
+    model_ft = models.resnet18(pretrained=True)
 
     for param in model_ft.parameters():
         param.requires_grad = False
@@ -76,7 +76,7 @@ if iteration == 0: # I want to generate a model
     torch.save(generated_model, PATH)
     print("model saved!")
     
-    if(model_visualization == 0): # only model geneartion
+    if(model_visualization == 0): # only model generation
         exit()
     else:
         visualize_model(mixed_datasets, class_names, generated_model)
@@ -93,19 +93,13 @@ else:
     
     images, labels = next(iter(mixed_datasets['valid']))
     
-    # print images
-    #imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
-
     outputs = loaded_model(images)
-    #labels = torch.tensor(labels)
 
     _, predicted = torch.max(outputs, 1)
 
     total += labels.size(0)
     correct += (predicted == labels).sum().item()
           
-    #print('Test Accuracy of the model: {} %'.format(100 * correct / total))
-
     # print images
     label_text = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
     predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
@@ -114,7 +108,6 @@ else:
     prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
 
     imshow(torchvision.utils.make_grid(images), prediction_text)
-    #print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
 
     plt.ioff()
     plt.show()
