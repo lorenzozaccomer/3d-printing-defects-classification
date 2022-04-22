@@ -65,7 +65,7 @@ def train_model(dataloaders, dataset_sizes, model, criterion, optimizer, schedul
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
 
-        logging.info()
+        logging.info("end of training ..")
 
     time_elapsed = time.time() - since
     logging.info(f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
