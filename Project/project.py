@@ -109,7 +109,7 @@ else:
     # print images
     label_text = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
     predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
-    accuracy_text = 'Accuracy: {} %'.format(100 * correct / total)
+    accuracy_text = 'Prediction accuracy: {} %'.format(100 * correct / total)
 
     prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
 
