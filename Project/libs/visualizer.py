@@ -49,7 +49,7 @@ def visualize_generated_model(loaded_dataset, class_names, model):
         logging.info(label_text)
         logging.info(predicted_text)
         logging.info(accuracy_text)
-        logging.info("show prediction images ..")
+        logging.info("show prediction ..")
         
     imshow(torchvision.utils.make_grid(images), prediction_text)
 
