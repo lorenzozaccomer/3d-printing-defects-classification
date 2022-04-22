@@ -5,7 +5,7 @@
 #
 ###
 
-import torch, torchvision
+import torch, torchvision, logging
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -25,19 +25,37 @@ def imshow(inp, title=None):
     plt.pause(0.001)
 
 
-def visualize_model(loaded_dataset, class_names, model):
+def visualize_generated_model(loaded_dataset, class_names, model):
+    
+    total = correct = 0
 
     with torch.no_grad():
         images, labels = next(iter(loaded_dataset['valid']))
-
-        # print images
-        imshow(torchvision.utils.make_grid(images), title=[class_names[x] for x in labels])
 
         outputs = model(images)
 
         _, predicted = torch.max(outputs, 1)
 
-        print('Predicted: ', ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))           
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+            
+        # print images
+        label_text = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
+        predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
+        accuracy_text = 'Prediction accuracy: {} %'.format(100 * correct / total)
+
+        prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
+        
+        logging.info(label_text)
+        logging.info(predicted_text)
+        logging.info(accuracy_text)
+        logging.info("show prediction images ..")
+        
+    imshow(torchvision.utils.make_grid(images), prediction_text)
+
+    plt.ioff()
+    plt.show()       
+    logging.info("closing ..")
 
 
 def generate_batch_images(input_dataset, labels):
