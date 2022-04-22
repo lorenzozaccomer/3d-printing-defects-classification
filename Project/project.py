@@ -35,7 +35,7 @@ model_visualization = 0 #skip visualize_model
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
 mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
-print(len(mixed_datasets['train']))
+#print(len(mixed_datasets['train']))
 
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
 #print(dataset_sizes)
@@ -104,13 +104,17 @@ else:
     total += labels.size(0)
     correct += (predicted == labels).sum().item()
           
-    print('Test Accuracy of the model: {} %'.format(100 * correct / total))
+    #print('Test Accuracy of the model: {} %'.format(100 * correct / total))
 
     # print images
-    label_text = 'Label: ' + str([class_names[x] for x in labels])
+    label_text = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
     predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
-    imshow(torchvision.utils.make_grid(images), label_text + '\n' + predicted_text)
-    print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
+    accuracy_text = 'Accuracy: {} %'.format(100 * correct / total)
+
+    prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
+
+    imshow(torchvision.utils.make_grid(images), prediction_text)
+    #print('Predicted: ',' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0])))
 
     plt.ioff()
     plt.show()
