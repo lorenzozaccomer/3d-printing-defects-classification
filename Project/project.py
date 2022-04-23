@@ -24,7 +24,7 @@ logging.getLogger('matplotlib.font_manager').disabled = True
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-IMAGE_PATH = "L:\\repositories\\3d-printer-recognition\\Images"
+IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Images"
 MODEL_PATH = './generated_model.pth'
 
 Path, Subpaths = CheckCurrentPathAndExtractSubPaths(IMAGE_PATH)
@@ -53,6 +53,9 @@ if iteration == 0: # I want to generate a model
     logging.info("loading model generation ..")
 
     model_ft = models.resnet50(pretrained=True)
+    
+    for param in model_ft.parameters():
+        param.requires_grad = False
 
     num_ftrs = model_ft.fc.in_features
     # Here the size of each output sample is set to 2.
