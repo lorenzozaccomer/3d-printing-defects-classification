@@ -4,6 +4,7 @@ from PIL import Image
 from numpy import indices
 
 import torch
+import logging
 import matplotlib.pyplot as plt
 
 # importing Functions from files
@@ -27,6 +28,10 @@ if iteration == 1:
     print('execution of model generation function')
 else:
     print('skip model generation, it loads the model from path and visualize the results')
+
+logging.info("-----------   NEW IMAGE CLASSIFICATION  -----------")
+print("loading image classification ..")
+logging.info("loading image classification ..")
 
 # Load model
 evaluation_model = torch.load(MODEL_PATH)
