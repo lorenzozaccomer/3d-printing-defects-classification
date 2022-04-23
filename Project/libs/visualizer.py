@@ -53,9 +53,10 @@ def visualize_generated_model(loaded_dataset, class_names, model):
         
     imshow(torchvision.utils.make_grid(images), prediction_text)
 
+    logging.info("end of model visualization ..")
+    
     plt.ioff()
     plt.show()       
-    logging.info("end of model visualization ..")
 
 
 def generate_batch_images(input_dataset, labels):
