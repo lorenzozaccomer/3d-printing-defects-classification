@@ -38,14 +38,16 @@ iteration = 0 # 1 to skip model generation
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
 mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
-logging.debug("len(mixed_datasets['train']): " + str(len(mixed_datasets['train'])))
-logging.debug("len(mixed_datasets['valid']): " + str(len(mixed_datasets['valid'])))
 
 dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
-logging.debug("dataset_sizes: " + str(dataset_sizes))
 
 # Extract the class from one dataset (are equal between them)
 labels = image_datasets['train'].classes
+
+logging.debug("dataset_sizes: " + str(dataset_sizes))
+logging.debug("len(mixed_datasets): " + str(len(mixed_datasets)))
+for label in ['train', 'valid']:
+    logging.debug("len(mixed_datasets): " + str(len(mixed_datasets[label])))
 
 if iteration == 0: # I want to generate a model
 
