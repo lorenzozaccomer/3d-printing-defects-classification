@@ -13,3 +13,9 @@ So you will have this situation:
 yourpath\3d-printer-recognition>python ./Project/classification.py --epochs 3
 
 In this particular example, you will change ONLY the epochs number, the others remain the same.
+
+Another example:
+
+python ./Project/classification.py --image_path_file './Project\\test\\8.jpg'
+
+in this case you can change the default test image classification, for example using 8.jpg image.
