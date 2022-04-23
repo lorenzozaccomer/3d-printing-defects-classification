@@ -22,13 +22,11 @@ plt.ion()   # interactive mode
 logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger('matplotlib.font_manager').disabled = True
 
-
-
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-DesiredPath = "L:\\repositories\\3d-printer-recognition\\Images"
-PATH = './generated_model.pth'
+IMAGE_PATH = "L:\\repositories\\3d-printer-recognition\\Images"
+MODEL_PATH = './generated_model.pth'
 
-Path, Subpaths = CheckCurrentPathAndExtractSubPaths(DesiredPath)
+Path, Subpaths = CheckCurrentPathAndExtractSubPaths(IMAGE_PATH)
 
 logging.info("-----------   NEW EXECUTION  -----------")
 logging.info("Path: " + Path)
@@ -76,7 +74,7 @@ if iteration == 0: # I want to generate a model
     logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
     
     logging.info("saving the model ..")
-    torch.save(generated_model, PATH)
+    torch.save(generated_model, MODEL_PATH)
     logging.info("model saved!")
     
     logging.info("visualize generated model ..")
@@ -86,6 +84,6 @@ else:
     logging.info("skipped a new model generation ..")
     logging.info("default model loading ..")
     
-    loaded_model = torch.load(PATH)
+    loaded_model = torch.load(MODEL_PATH)
 
     visualize_generated_model(mixed_datasets, class_names, loaded_model)
