@@ -28,27 +28,12 @@ def CheckCurrentPathAndExtractSubPaths(DesiredPath):
     also return the dirs on the path,
     otherwelse it will terminate the script,
     """
-    # On my computers I have 2 different paths
-    #Path1 = 'U:\\repositories\\3d-printer-recognition\\Images'
-    Path2 = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
-    PathVM = '/home/lorenzo/Scrivania/3d-printer-recognition/Images'
-    DefaultPath = ""
 
-    DefaultPath = DesiredPath
-
-    # for VM Paths
-    if os.path.isdir(PathVM):
-        DefaultPath = PathVM
-
-    # for My Windows PCs
-    if not(os.path.isdir(DefaultPath)):
-        DefaultPath = Path2
-    elif not(os.path.isdir(DefaultPath) or os.path.isdir(Path2)):
-        print("path error! check it")
+    if not(os.path.isdir(DesiredPath)):
+        print("path error! it not exists")
+        exit()
+    elif not(os.listdir(DesiredPath)):
+        print("On your path there aren't folders!")
         exit()
 
-    if not(os.listdir(DefaultPath)):
-        print("not directories on this path")
-        exit()
-
-    return DefaultPath, os.listdir(DefaultPath)
+    return DesiredPath, os.listdir(DesiredPath)
