@@ -23,9 +23,7 @@ plt.ion()   # interactive mode
 logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger('matplotlib.font_manager').disabled = True
 
-IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Images"
-MODEL_PATH = './generated_model.pth'
-iteration = 1 # 0 to skip model generation
+
 
 def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction = 1):
     """
@@ -107,6 +105,3 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
 
         visualize_generated_model(mixed_datasets, labels, loaded_model)
         print("closing ..")
-
-# line only for testing
-#model_generation(IMAGE_PATH, MODEL_PATH, 0)
