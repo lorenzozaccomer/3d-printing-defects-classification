@@ -25,7 +25,7 @@ logging.getLogger('matplotlib.font_manager').disabled = True
 
 
 
-def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction = 1):
+def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction = 1, EPOCH_NUMBER = 1, LEARNING_RATE = 0.05):
     """
     This function will generate the model for image classification
     that you desire, by default the iteration flag is equal to 0,
@@ -75,13 +75,13 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
         criterion = nn.CrossEntropyLoss()
 
         # Observe that all parameters are being optimized
-        optimizer_ft = optim.SGD(pretrained_model.parameters(), lr=0.05, momentum=0.9)
+        optimizer_ft = optim.SGD(pretrained_model.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
         # Decay LR by a factor of 0.1 every 7 epochs
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
         starting_time = time.time()
-        generated_model = train_model(mixed_datasets, dataset_sizes, pretrained_model, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=1)
+        generated_model = train_model(mixed_datasets, dataset_sizes, pretrained_model, criterion, optimizer_ft, exp_lr_scheduler, EPOCH_NUMBER)
         logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
         
         logging.info("saving the model ..")

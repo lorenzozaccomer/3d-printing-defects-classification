@@ -34,7 +34,7 @@ labels = ['NoDefects', 'YesDefects']
 
 if opt.iteration == 1:
     print('execution of model generation function')
-    model_generation(opt.dataset_images_path, opt.model_path, opt.iteration, opt.visualize_prediction)
+    model_generation(opt.dataset_images_path, opt.model_path, opt.iteration, opt.visualize_prediction, opt.epochs, opt.learning_rate)
 else:
     print('skip model generation, it loads the model from path and visualize the results')
 
