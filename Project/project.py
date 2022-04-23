@@ -36,6 +36,11 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
 
     Path, Subpaths = CheckCurrentPathAndExtractSubPaths(IMAGE_PATH)
 
+    logging.debug("iteration: " + str(iteration))
+    logging.debug("visualize_prediction: " + str(visualize_prediction))
+    logging.debug("EPOCH_NUMBER: " + str(EPOCH_NUMBER))
+    logging.debug("LEARNING_RATE: " + str(LEARNING_RATE))
+
     logging.info("Path: " + Path)
     logging.info("Subpaths: " + str(Subpaths))
 

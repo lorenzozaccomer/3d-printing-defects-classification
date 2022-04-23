@@ -1,0 +1,124 @@
+2022-04-23 19:39:47,925 - INFO - Path: ./Images
+2022-04-23 19:39:47,925 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:39:47,940 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:39:47,940 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:39:47,940 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:39:47,940 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:42:31,793 - INFO - Path: ./Images
+2022-04-23 19:42:31,794 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:42:31,810 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:42:31,811 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:42:31,811 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:42:31,811 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:42:43,286 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 19:42:43,287 - INFO - loading image classification ..
+2022-04-23 19:42:49,817 - INFO - Path: ./Images
+2022-04-23 19:42:49,822 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:42:49,837 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:42:49,837 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:42:49,837 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:42:49,837 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:42:49,838 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 19:42:49,839 - INFO - loading image classification ..
+2022-04-23 19:49:00,270 - INFO - Path: ./Images
+2022-04-23 19:49:00,274 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:49:00,288 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:49:00,289 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:49:00,289 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:49:00,289 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:49:00,291 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 19:49:00,291 - INFO - loading image classification ..
+2022-04-23 19:54:10,361 - INFO - Path: ./Images
+2022-04-23 19:54:10,362 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:54:10,377 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:54:10,377 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:54:10,377 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:54:10,377 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:54:10,378 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 19:54:10,378 - INFO - loading image classification ..
+2022-04-23 19:54:41,245 - INFO - Path: ./Images
+2022-04-23 19:54:41,245 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 19:54:41,265 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 19:54:41,265 - DEBUG - len(mixed_datasets): 2
+2022-04-23 19:54:41,265 - DEBUG - len(mixed_datasets): 169
+2022-04-23 19:54:41,266 - DEBUG - len(mixed_datasets): 7
+2022-04-23 19:54:41,266 - INFO - -----------   NEW ITERATION  -----------
+2022-04-23 19:54:41,266 - INFO - loading model generation ..
+2022-04-23 19:54:41,668 - INFO - Epoch 0/0
+2022-04-23 19:54:41,668 - INFO - ----------
+2022-04-23 20:00:30,794 - INFO - Path: ./Images
+2022-04-23 20:00:30,808 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:00:30,821 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:00:30,821 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:00:30,821 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:00:30,822 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:00:30,822 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:00:30,823 - INFO - loading image classification ..
+2022-04-23 20:04:20,767 - INFO - Path: ./Images
+2022-04-23 20:04:21,267 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:04:29,016 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:04:29,017 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:04:29,017 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:04:29,017 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:04:29,019 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:04:29,020 - INFO - loading image classification ..
+2022-04-23 20:04:52,520 - INFO - Path: ./Images
+2022-04-23 20:04:52,520 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:04:52,538 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:04:52,538 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:04:52,538 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:04:52,538 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:04:52,538 - INFO - -----------   NEW ITERATION  -----------
+2022-04-23 20:04:52,538 - INFO - loading model generation ..
+2022-04-23 20:04:52,948 - INFO - Epoch 0/0
+2022-04-23 20:04:52,948 - INFO - ----------
+2022-04-23 20:05:51,053 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:05:51,054 - INFO - loading image classification ..
+2022-04-23 20:06:00,475 - INFO - Path: ./Images
+2022-04-23 20:06:00,475 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:06:00,484 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:06:00,484 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:06:00,484 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:06:00,484 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:06:00,484 - INFO - -----------   NEW ITERATION  -----------
+2022-04-23 20:06:00,485 - INFO - loading model generation ..
+2022-04-23 20:06:00,939 - INFO - Epoch 0/0
+2022-04-23 20:06:00,939 - INFO - ----------
+2022-04-23 20:06:45,006 - INFO - Path: ./Images
+2022-04-23 20:06:45,007 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:06:45,013 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:06:45,013 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:06:45,013 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:06:45,014 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:06:45,014 - INFO - -----------   NEW ITERATION  -----------
+2022-04-23 20:06:45,014 - INFO - loading model generation ..
+2022-04-23 20:06:45,466 - INFO - Epoch 0/0
+2022-04-23 20:06:45,467 - INFO - ----------
+2022-04-23 20:08:50,266 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:08:50,267 - INFO - loading image classification ..
+2022-04-23 20:09:37,203 - INFO - Path: ./Images
+2022-04-23 20:09:37,204 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:09:37,215 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:09:37,215 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:09:37,215 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:09:37,215 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:17:53,499 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:17:53,500 - INFO - loading image classification ..
+2022-04-23 20:20:44,818 - INFO - Path: ./Images
+2022-04-23 20:20:44,819 - INFO - Subpaths: ['train', 'valid']
+2022-04-23 20:20:44,831 - DEBUG - dataset_sizes: {'train': 675, 'valid': 25}
+2022-04-23 20:20:44,831 - DEBUG - len(mixed_datasets): 2
+2022-04-23 20:20:44,832 - DEBUG - len(mixed_datasets): 169
+2022-04-23 20:20:44,832 - DEBUG - len(mixed_datasets): 7
+2022-04-23 20:20:47,705 - INFO - -----------   NEW ITERATION  -----------
+2022-04-23 20:20:47,706 - INFO - loading model generation ..
+2022-04-23 20:23:56,347 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:23:56,348 - INFO - loading image classification ..
+2022-04-23 20:24:51,689 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:24:51,690 - INFO - loading image classification ..
+2022-04-23 20:25:33,684 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:25:33,684 - INFO - loading image classification ..
+2022-04-23 20:25:42,998 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:25:43,005 - INFO - loading image classification ..
+2022-04-23 20:25:52,511 - INFO - -----------   NEW IMAGE CLASSIFICATION  -----------
+2022-04-23 20:25:52,525 - INFO - loading image classification ..
