@@ -23,6 +23,7 @@ logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG
 logging.getLogger('matplotlib.font_manager').disabled = True
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
 IMAGE_PATH = "L:\\repositories\\3d-printer-recognition\\Images"
 MODEL_PATH = './generated_model.pth'
 
@@ -44,20 +45,19 @@ dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
 logging.debug("dataset_sizes: " + str(dataset_sizes))
 
 # Extract the class from one dataset (are equal between them)
-class_names = image_datasets['train'].classes
-
-#generate_batch_images(mixed_datasets['train'],class_names)
+labels = image_datasets['train'].classes
 
 if iteration == 0: # I want to generate a model
 
+    print("loading model generation ..")
     logging.info("loading model generation ..")
 
     model_ft = models.resnet50(pretrained=True)
 
     num_ftrs = model_ft.fc.in_features
     # Here the size of each output sample is set to 2.
-    # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-    model_ft.fc = nn.Linear(num_ftrs, len(class_names))
+    # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(labels)).
+    model_ft.fc = nn.Linear(num_ftrs, len(labels))
 
     model_ft = model_ft.to(device)
 
@@ -78,7 +78,8 @@ if iteration == 0: # I want to generate a model
     logging.info("model saved!")
     
     logging.info("visualize generated model ..")
-    visualize_generated_model(mixed_datasets, class_names, generated_model)
+    visualize_generated_model(mixed_datasets, labels, generated_model)
+    print("closing ..")
 
 else:
     logging.info("skipped a new model generation ..")
@@ -86,4 +87,4 @@ else:
     
     loaded_model = torch.load(MODEL_PATH)
 
-    visualize_generated_model(mixed_datasets, class_names, loaded_model)
+    visualize_generated_model(mixed_datasets, labels, loaded_model)

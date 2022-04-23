@@ -55,7 +55,7 @@ def visualize_generated_model(loaded_dataset, class_names, model):
 
     plt.ioff()
     plt.show()       
-    logging.info("closing ..")
+    logging.info("end of model visualization ..")
 
 
 def generate_batch_images(input_dataset, labels):
