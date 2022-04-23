@@ -33,7 +33,7 @@ logging.info("-----------   NEW EXECUTION  -----------")
 logging.info("Path: " + Path)
 logging.info("Subpaths: " + str(Subpaths))
 
-iteration = 0 # 1 to skip model generation
+iteration = 1 # 1 to skip model generation
 
 image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
 
@@ -54,28 +54,27 @@ if iteration == 0: # I want to generate a model
     print("loading model generation ..")
     logging.info("loading model generation ..")
 
-    model_ft = models.resnet50(pretrained=True)
+    pretrained_model = models.resnet50(pretrained=True)
     
-    for param in model_ft.parameters():
+    for param in pretrained_model.parameters():
         param.requires_grad = False
 
-    num_ftrs = model_ft.fc.in_features
-    # Here the size of each output sample is set to 2.
-    # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(labels)).
-    model_ft.fc = nn.Linear(num_ftrs, len(labels))
+    num_ftrs = pretrained_model.fc.in_features
 
-    model_ft = model_ft.to(device)
+    pretrained_model.fc = nn.Linear(num_ftrs, len(labels))
+
+    pretrained_model = pretrained_model.to(device)
 
     criterion = nn.CrossEntropyLoss()
 
     # Observe that all parameters are being optimized
-    optimizer_ft = optim.SGD(model_ft.parameters(), lr=0.05, momentum=0.9)
+    optimizer_ft = optim.SGD(pretrained_model.parameters(), lr=0.05, momentum=0.9)
 
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
     starting_time = time.time()
-    generated_model = train_model(mixed_datasets, dataset_sizes, model_ft, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=1)
+    generated_model = train_model(mixed_datasets, dataset_sizes, pretrained_model, criterion, optimizer_ft, exp_lr_scheduler, num_epochs=1)
     logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
     
     logging.info("saving the model ..")
