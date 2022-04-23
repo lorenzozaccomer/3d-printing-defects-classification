@@ -1,0 +1,15 @@
+
+If you want to generate a new model with another parameter, open your folder project with your IDE,
+you will have your command line at this position:
+
+yourpath\3d-printer-recognition>
+
+Now write for example on the command line:  
+
+python ./Project/classification.py --epochs 3
+
+So you will have this situation:
+
+yourpath\3d-printer-recognition>python ./Project/classification.py --epochs 3
+
+In this particular example, you will change ONLY the epochs number, the others remain the same.

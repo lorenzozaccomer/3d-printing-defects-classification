@@ -10,7 +10,13 @@
             "request": "launch",
             "program": "${file}",
             "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "args" : [
+                "--learning_rate", "0.05", 
+                "--epochs", "1", 
+                "--model_path", "./generated_model.pth",
+                "--iteration", "0", 
+                "--visualize_prediction", "0", ]
         }
     ]
 }

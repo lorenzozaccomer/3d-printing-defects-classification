@@ -5,6 +5,7 @@ from numpy import indices
 
 import torch
 import logging
+import argparse
 import matplotlib.pyplot as plt
 
 # importing Functions from files
@@ -12,11 +13,23 @@ from libs.visualizer import imshow
 from libs.datasets import img_transformation
 from project import model_generation
 
+parser = argparse.ArgumentParser(description='3d Printer Image Classification')
+
+# Command line arguments
+parser.add_argument('--learning_rate', type = float, default = 0.05, help = 'Learning Rate')
+parser.add_argument('--epochs', type = int, default = 1, help = 'Epochs')
+parser.add_argument('--model_path', type = str, default = './generated_model.pth', help = 'Path of your model')
+parser.add_argument('--iteration', type = int, default = 0, help = 'Iteration')
+parser.add_argument('--visualize_prediction', type = int, default = 0, help = 'Visualize Prediction')
+
+opt = parser.parse_args()
+print(opt)
+
 plt.ion()   # interactive mode
 
-MODEL_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
-IMAGE_DATASET_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
-IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
+MODEL_PATH = './generated_model.pth'
+IMAGE_DATASET_PATH = './Images'
+IMAGE_PATH = "./Project\\test\\7.jpg"
 classes = ['NoDefects', 'YesDefects']
 
 iteration = 0
