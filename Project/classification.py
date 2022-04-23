@@ -6,6 +6,7 @@ from numpy import indices
 import torch
 import logging
 import argparse
+import os
 import matplotlib.pyplot as plt
 
 # importing Functions from files
@@ -29,7 +30,7 @@ plt.ion()   # interactive mode
 
 MODEL_PATH = './generated_model.pth'
 IMAGE_DATASET_PATH = './Images'
-IMAGE_PATH = "./Project\\test\\7.jpg"
+IMAGE_PATH_FILE = "./Project\\test\\7.jpg"
 classes = ['NoDefects', 'YesDefects']
 
 iteration = 0
@@ -42,6 +43,11 @@ if iteration == 1:
 else:
     print('skip model generation, it loads the model from path and visualize the results')
 
+# check if the image path exists
+if not(os.path.exists(IMAGE_PATH_FILE)):
+    print("path file error! this image file doesn't exist")
+    exit()
+
 logging.info("-----------   NEW IMAGE CLASSIFICATION  -----------")
 print("loading image classification ..")
 logging.info("loading image classification ..")
@@ -51,7 +57,7 @@ evaluation_model = torch.load(MODEL_PATH)
 evaluation_model.eval()
 
 #Load image
-img = Image.open(IMAGE_PATH)
+img = Image.open(IMAGE_PATH_FILE)
 image = img_transformation(img)
 
 # Carry out inference
