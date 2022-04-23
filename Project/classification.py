@@ -5,23 +5,17 @@ from numpy import indices
 
 import torch
 import matplotlib.pyplot as plt
-from torchvision import transforms
 
+# importing Functions from files
 from libs.visualizer import imshow
+from libs.datasets import img_transformation
 from project import model_generation
 
 plt.ion()   # interactive mode
 
-img_transformation = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
- ])
-
 MODEL_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
 IMAGE_DATASET_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
-IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\4.jpg"
+IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
 classes = ['NoDefects', 'YesDefects']
 
 iteration = 0
