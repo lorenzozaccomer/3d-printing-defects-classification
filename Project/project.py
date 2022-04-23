@@ -15,6 +15,7 @@ from libs.dirs import *
 from libs.datasets import *
 from libs.training import *
 from libs.visualizer import *
+from libs.constants import *
 
 cudnn.benchmark = True
 plt.ion()   # interactive mode
@@ -22,18 +23,17 @@ plt.ion()   # interactive mode
 logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger('matplotlib.font_manager').disabled = True
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Images"
 MODEL_PATH = './generated_model.pth'
 iteration = 1 # 0 to skip model generation
 
-def model_generation(IMAGE_PATH, MODEL_PATH, iteration=0):
+def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction = 1):
     """
     This function will generate the model for image classification
-    that you desire, by default the iteration flas is equal to 0,
+    that you desire, by default the iteration flag is equal to 0,
     so in this case it loads the model from the MODEL_PATH, 
-    otherwise with iteration = 1 you create a new model
+    otherwise with iteration = 1 you create a new model and you can visualize
+    its prediction
     """
 
     Path, Subpaths = CheckCurrentPathAndExtractSubPaths(IMAGE_PATH)
@@ -55,7 +55,8 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration=0):
     for label in ['train', 'valid']:
         logging.debug("len(mixed_datasets): " + str(len(mixed_datasets[label])))
 
-    # I want to generate a model
+    # generate a new model and save it on the path
+    # that you choose
     if iteration == 1:
 
         logging.info("-----------   NEW ITERATION  -----------")
@@ -93,9 +94,11 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration=0):
         visualize_generated_model(mixed_datasets, labels, generated_model)
         print("closing ..")
 
-    # if iteration = 0 the script load the model from the path
-    else:
-        print("loading od default model from path ..")
+    # if iteration = 0 and visualize_prediction is = 1
+    # the script load the model from the path that you choose and
+    # visualize the prediction
+    elif iteration == 0 and visualize_prediction == 1:
+        print("loading of default model from path ..")
         logging.info("-----------   LOAD MODEL  -----------")
         logging.info("skipped a new model generation ..")
         logging.info("loading of default model from path ..")
