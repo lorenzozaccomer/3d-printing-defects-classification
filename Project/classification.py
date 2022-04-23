@@ -7,28 +7,39 @@ import torch
 import matplotlib.pyplot as plt
 from torchvision import transforms
 
-from test_visualizer import imshow
+from libs.visualizer import imshow
+from project import model_generation
 
 plt.ion()   # interactive mode
 
-transform = transforms.Compose([
+img_transformation = transforms.Compose([
     transforms.Resize(256),
     transforms.CenterCrop(224),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
  ])
 
-PATH_MODEL = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
-PATH_IMAGE = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
+MODEL_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
+IMAGE_DATASET_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
+IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
 classes = ['NoDefects', 'YesDefects']
 
+iteration = 0
+
+model_generation(IMAGE_DATASET_PATH, MODEL_PATH, iteration)
+
+if iteration == 1:
+    print('execution of model generation function')
+else:
+    print('skip model generation, it loads the model from path and visualize the results')
+
 # Load model
-evaluation_model = torch.load(PATH_MODEL)
+evaluation_model = torch.load(MODEL_PATH)
 evaluation_model.eval()
 
 #Load image
-img = Image.open(PATH_IMAGE)
-image = transform(img)
+img = Image.open(IMAGE_PATH)
+image = img_transformation(img)
 
 # Carry out inference
 tensor_image = image.unsqueeze(0)
