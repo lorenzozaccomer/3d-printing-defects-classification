@@ -21,12 +21,13 @@ img_transformation = transforms.Compose([
 
 MODEL_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\generated_model.pth'
 IMAGE_DATASET_PATH = 'L:\\Università\\repositories\\3d-printer-recognition\\Images'
-IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\7.jpg"
+IMAGE_PATH = "L:\\Università\\repositories\\3d-printer-recognition\\Project\\test\\4.jpg"
 classes = ['NoDefects', 'YesDefects']
 
 iteration = 0
+visualize_prediction = 0
 
-model_generation(IMAGE_DATASET_PATH, MODEL_PATH, iteration)
+model_generation(IMAGE_DATASET_PATH, MODEL_PATH, iteration, visualize_prediction)
 
 if iteration == 1:
     print('execution of model generation function')
