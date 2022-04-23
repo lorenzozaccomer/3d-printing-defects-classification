@@ -106,4 +106,4 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration=0):
         print("closing ..")
 
 # line only for testing
-model_generation(IMAGE_PATH, MODEL_PATH, 0)
+#model_generation(IMAGE_PATH, MODEL_PATH, 0)
