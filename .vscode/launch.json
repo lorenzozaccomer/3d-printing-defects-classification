@@ -17,7 +17,8 @@
                 "--model_path", "./generated_model.pth",
                 "--iteration", "0", 
                 "--visualize_prediction", "0",
-                "--image_path_file", "./Project\\test\\7.jpg"]
+                "--image_path_file", "./Project\\test\\7.jpg",
+                "--dataset_images_path", "./Images"]
         }
     ]
 }
