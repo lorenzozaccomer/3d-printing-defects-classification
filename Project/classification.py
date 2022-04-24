@@ -30,19 +30,19 @@ parser.add_argument('--learning_rate', type = float, default = 0.05, help = 'Lea
 parser.add_argument('--model_path', type = str, default = './generated_model.pth', help = 'Path of your model')
 parser.add_argument('--visualize_prediction', type = int, default = 0, help = 'Visualize Prediction')
 
-opt = parser.parse_args()
-print(opt)
+option = parser.parse_args()
+print(option)
 
 labels = ['NoDefects', 'YesDefects']
 
-if opt.iteration == 1:
+if option.iteration == 1:
     print('execution of model generation function')
-    model_generation(opt.dataset_images_path, opt.model_path, opt.iteration, opt.visualize_prediction, opt.epochs, opt.learning_rate)
+    model_generation(option.dataset_images_path, option.model_path, option.iteration, option.visualize_prediction, option.epochs, option.learning_rate)
 else:
     print('skip model generation, it loads the model from path and visualize the results')
 
 # check if the image path exists
-if not(os.path.exists(opt.image_path_file)):
+if not(os.path.exists(option.image_path_file)):
     print("path file error! this image file doesn't exist")
     exit()
 
@@ -51,11 +51,11 @@ print("loading image classification ..")
 logging.info("loading image classification ..")
 
 # Load model
-evaluation_model = torch.load(opt.model_path)
+evaluation_model = torch.load(option.model_path)
 evaluation_model.eval()
 
 #Load image
-img = Image.open(opt.image_path_file)
+img = Image.open(option.image_path_file)
 image = img_transformation(img)
 
 # Carry out inference
