@@ -11,11 +11,11 @@ from torchvision import models
 import matplotlib.pyplot as plt
 
 # importing Functions from files
-from libs.dirs import *
-from libs.datasets import *
-from libs.training import *
-from libs.visualizer import *
-from libs.constants import *
+from libraries.dirs import *
+from libraries.datasets import *
+from libraries.training import *
+from libraries.visualizer import *
+from libraries.constants import *
 
 cudnn.benchmark = True
 plt.ion()   # interactive mode
@@ -66,7 +66,7 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
         print("loading model generation ..")
         logging.info("loading model generation ..")
 
-        pretrained_model = models.resnet50(pretrained=True)
+        pretrained_model = models.resnet18(pretrained=True)
         
         for param in pretrained_model.parameters():
             param.requires_grad = False
