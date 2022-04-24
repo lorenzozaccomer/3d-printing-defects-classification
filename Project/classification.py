@@ -19,9 +19,9 @@ plt.ion()   # interactive mode
 parser = argparse.ArgumentParser(description='3d Printer Image Classification')
 
 # Command line arguments
-parser.add_argument('--dataset_images_path', type = str, default = './Images', help = 'Is the path of your image datasets')
+parser.add_argument('--dataset_images_path', type = str, default = './Images/3d/', help = 'Is the path of your image datasets')
 parser.add_argument('--epochs', type = int, default = 25, help = 'Epoch number')
-parser.add_argument('--image_path_file', type = str, default = './Project\\classification images\\7.jpg', help = 'Is the path for your test image classification')
+parser.add_argument('--image_path_file', type = str, default = './Images\\classification-images\\7.jpg', help = 'Is the path for your test image classification')
 parser.add_argument('--iteration', type = int, default = 0, help = 'Iteration')
 parser.add_argument('--learning_rate', type = float, default = 0.05, help = 'Learning Rate')
 parser.add_argument('--model_path', type = str, default = './generated_model.pth', help = 'Path of your model')
