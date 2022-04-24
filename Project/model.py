@@ -66,7 +66,7 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
         print("loading model generation ..")
         logging.info("loading model generation ..")
 
-        pretrained_model = models.resnet18(pretrained=True)
+        pretrained_model = models.resnet50(pretrained=True)
         
         for param in pretrained_model.parameters():
             param.requires_grad = False
