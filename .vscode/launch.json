@@ -12,8 +12,8 @@
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "args" : [
-                "--learning_rate", "0.05", 
-                "--epochs", "1", 
+                "--learning_rate", "0.05", // 0.001
+                "--epochs", "25", // 40
                 "--model_path", "./generated_model.pth",
                 "--iteration", "0", 
                 "--visualize_prediction", "0",
