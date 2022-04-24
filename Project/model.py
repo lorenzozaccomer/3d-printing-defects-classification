@@ -20,7 +20,7 @@ from libraries.constants import *
 cudnn.benchmark = True
 plt.ion()   # interactive mode
 
-logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='log_generation_model.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger('matplotlib.font_manager').disabled = True
 
 

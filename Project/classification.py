@@ -16,6 +16,9 @@ from model import model_generation
 
 plt.ion()   # interactive mode
 
+logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger('matplotlib.font_manager').disabled = True
+
 parser = argparse.ArgumentParser(description='3d Printer Image Classification')
 
 # Command line arguments
