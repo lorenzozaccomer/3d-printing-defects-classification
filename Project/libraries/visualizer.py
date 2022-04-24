@@ -9,7 +9,7 @@ import torch, torchvision, logging
 import matplotlib.pyplot as plt
 import numpy as np
 
-from libs.constants import *
+from libraries.constants import *
 
 def imshow(inp, title=None):
     """Imshow for Tensor."""

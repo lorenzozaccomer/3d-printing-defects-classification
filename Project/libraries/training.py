@@ -7,7 +7,7 @@
 import logging
 import time, copy, torch
 
-from libs.constants import *
+from libraries.constants import *
 
 def train_model(dataloaders, dataset_sizes, model, criterion, optimizer, scheduler, num_epochs=25):
     since = time.time()
