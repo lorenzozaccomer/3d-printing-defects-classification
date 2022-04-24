@@ -16,14 +16,11 @@ from model import model_generation
 
 plt.ion()   # interactive mode
 
-logging.basicConfig(filename='log_image_classification.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-logging.getLogger('matplotlib.font_manager').disabled = True
-
 parser = argparse.ArgumentParser(description='3d Printer Image Classification')
 
 # Command line arguments
 parser.add_argument('--dataset_images_path', type = str, default = './Images', help = 'Is the path of your image datasets')
-parser.add_argument('--epochs', type = int, default = 1, help = 'Epoch number')
+parser.add_argument('--epochs', type = int, default = 25, help = 'Epoch number')
 parser.add_argument('--image_path_file', type = str, default = './Project\\test\\7.jpg', help = 'Is the path for your test image classification')
 parser.add_argument('--iteration', type = int, default = 0, help = 'Iteration')
 parser.add_argument('--learning_rate', type = float, default = 0.05, help = 'Learning Rate')
