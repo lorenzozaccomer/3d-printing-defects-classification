@@ -10,9 +10,9 @@ import os
 import matplotlib.pyplot as plt
 
 # importing Functions from files
-from libs.visualizer import imshow
-from libs.datasets import img_transformation
-from project import model_generation
+from libraries.visualizer import imshow
+from libraries.datasets import img_transformation
+from model import model_generation
 
 plt.ion()   # interactive mode
 
