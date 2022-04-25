@@ -39,21 +39,20 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
     its prediction
     """
 
-    SUB_DIRS = ReturnDirectories(IMAGE_PATH)
+    SUB_DIRECTORIES = ReturnDirectories(IMAGE_PATH)
 
-    image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRS)
+    image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRECTORIES)
+    mixed_datasets = ShuffleDatasets(image_datasets, SUB_DIRECTORIES)
 
-    mixed_datasets = ShuffleDatasets(image_datasets, SUB_DIRS)
-
-    dataset_sizes = ImagesDatasetSize(image_datasets, SUB_DIRS)
-    mixed_datasets_sizes = ImagesDatasetSize(mixed_datasets, SUB_DIRS)
+    dataset_sizes = ImagesDatasetSize(image_datasets, SUB_DIRECTORIES)
+    mixed_datasets_sizes = ImagesDatasetSize(mixed_datasets, SUB_DIRECTORIES)
 
     # Extract the labels from one dataset (are equal between them)
     labels = image_datasets['train'].classes
 
     logging.debug("dataset sizes: " + str(dataset_sizes))
     logging.debug("mixed_datasets sizes: " + str(mixed_datasets_sizes))
-    
+
     # generate a new model and save it on the path
     # that you choose
     if iteration == 1:
