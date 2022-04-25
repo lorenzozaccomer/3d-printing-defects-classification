@@ -39,15 +39,7 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
     its prediction
     """
 
-    SUB_DIRS = CheckDirectories(IMAGE_PATH)
-
-    logging.debug("iteration: " + str(iteration))
-    logging.debug("visualize_prediction: " + str(visualize_prediction))
-    logging.debug("EPOCH_NUMBER: " + str(EPOCH_NUMBER))
-    logging.debug("LEARNING_RATE: " + str(LEARNING_RATE))
-
-    logging.info("IMAGE_PATH: " + IMAGE_PATH)
-    logging.info("SUB_DIRS: " + str(SUB_DIRS))
+    SUB_DIRS = ReturnDirectories(IMAGE_PATH)
 
     image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRS)
 
