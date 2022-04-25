@@ -1,4 +1,3 @@
-
 ###
 # 
 #  dirs.py
@@ -6,18 +5,10 @@
 ###
 
 import os
-import logging
 
-
-def CheckDirectories(DesiredPath):
+def ReturnDirectories(DesiredPath):
     """
-    Check if on the path there are directories,
-    otherwelse it will terminate the script,
+    Return directories on the desired path
     """
-
-    if not(os.listdir(DesiredPath)):
-        print("On your path there aren't folders!")
-        logging.debug("NOT DIRECTORIES ERROR")
-        exit()
 
     return os.listdir(DesiredPath)

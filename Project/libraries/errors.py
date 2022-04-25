@@ -45,8 +45,21 @@ def CheckParametersErrors(EPOCHS, LEARNING_RATE, ITERATION,
         print("dataset image path error! it not exists")
         logging.debug("DATASET_IMAGE_PATH ERROR")
         exit()
+    if not(os.listdir(DATASET_IMAGE_PATH)):
+        print("On your path there aren't folders!")
+        logging.debug("NOT DIRECTORIES ERROR")
+        exit()
     else:
         print("not error, you can proceed")
         logging.info("NOT ERROR ON YOUR PARAMETER")
+
+    
+    logging.debug("ITERATION: " + str(ITERATION))
+    logging.debug("VISUALIZE_PREDICTION: " + str(VISUALIZE_PREDICTION))
+    logging.debug("EPOCHS: " + str(EPOCHS))
+    logging.debug("TEST_IMAGE_PATH: " + TEST_IMAGE_PATH)
+    logging.debug("MODEL_PATH: " + MODEL_PATH)
+    logging.debug("DATASET_IMAGE_PATH: " + DATASET_IMAGE_PATH)
+    logging.info("DATASET_SUB_DIRECTORIES: " + str(os.listdir(DATASET_IMAGE_PATH)))
 
 
