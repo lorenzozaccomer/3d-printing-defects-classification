@@ -30,7 +30,7 @@ logging.getLogger('matplotlib.font_manager').disabled = True
 
 
 
-def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction = 1, EPOCH_NUMBER = 1, LEARNING_RATE = 0.05):
+def ModelGeneration(IMAGE_PATH, MODEL_PATH, EPOCH_NUMBER = 1, LEARNING_RATE = 0.05):
     """
     This function will generate the model for image classification
     that you desire, by default the iteration flag is equal to 0,
@@ -39,69 +39,58 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
     its prediction
     """
 
-    SUB_DIRECTORIES = ReturnDirectories(IMAGE_PATH)
+    _, mixed_datasets, labels, dataset_sizes = CreateAndShuffleDatasetFromPath(IMAGE_PATH)
 
-    image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRECTORIES)
-    mixed_datasets = ShuffleDatasets(image_datasets, SUB_DIRECTORIES)
+    logging.info("-----------   NEW ITERATION  -----------")
+    print("loading model generation ..")
+    logging.info("loading model generation ..")
 
-    dataset_sizes = ImagesDatasetSize(image_datasets, SUB_DIRECTORIES)
-    mixed_datasets_sizes = ImagesDatasetSize(mixed_datasets, SUB_DIRECTORIES)
+    pretrained_model = models.resnet50(pretrained=True)
+    
+    for param in pretrained_model.parameters():
+        param.requires_grad = False
 
-    # Extract the labels from one dataset (are equal between them)
-    labels = image_datasets['train'].classes
+    num_ftrs = pretrained_model.fc.in_features
 
-    logging.debug("dataset sizes: " + str(dataset_sizes))
-    logging.debug("mixed_datasets sizes: " + str(mixed_datasets_sizes))
+    pretrained_model.fc = nn.Linear(num_ftrs, len(labels))
 
-    # generate a new model and save it on the path
-    # that you choose
-    if iteration == 1:
+    pretrained_model = pretrained_model.to(device)
 
-        logging.info("-----------   NEW ITERATION  -----------")
-        print("loading model generation ..")
-        logging.info("loading model generation ..")
+    criterion = nn.CrossEntropyLoss()
 
-        pretrained_model = models.resnet50(pretrained=True)
-        
-        for param in pretrained_model.parameters():
-            param.requires_grad = False
+    # Observe that all parameters are being optimized
+    optimizer_ft = optim.SGD(pretrained_model.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
-        num_ftrs = pretrained_model.fc.in_features
+    # Decay LR by a factor of 0.1 every 7 epochs
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
-        pretrained_model.fc = nn.Linear(num_ftrs, len(labels))
+    starting_time = time.time()
+    generated_model = train_model(mixed_datasets, dataset_sizes, pretrained_model, criterion, optimizer_ft, exp_lr_scheduler, EPOCH_NUMBER)
+    logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
+    
+    logging.info("saving the model ..")
+    torch.save(generated_model, MODEL_PATH)
+    logging.info("model saved!")
+    
+    logging.info("visualize generated model ..")
+    visualize_generated_model(mixed_datasets, labels, generated_model)
+    print("closing ..")
 
-        pretrained_model = pretrained_model.to(device)
 
-        criterion = nn.CrossEntropyLoss()
+def LoadModelVisualization(IMAGE_PATH, MODEL_PATH):
+    """
+    This function load the model previously created from the path and
+    allow to visualize the prediction
+    """
 
-        # Observe that all parameters are being optimized
-        optimizer_ft = optim.SGD(pretrained_model.parameters(), lr=LEARNING_RATE, momentum=0.9)
+    print("loading of default model from path ..")
+    logging.info("-----------   LOAD MODEL  -----------")
+    logging.info("skipped a new model generation ..")
+    logging.info("loading of default model from path ..")
 
-        # Decay LR by a factor of 0.1 every 7 epochs
-        exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
+    _, mixed_datasets, labels, _ = CreateAndShuffleDatasetFromPath(IMAGE_PATH)
+    
+    loaded_model = torch.load(MODEL_PATH)
 
-        starting_time = time.time()
-        generated_model = train_model(mixed_datasets, dataset_sizes, pretrained_model, criterion, optimizer_ft, exp_lr_scheduler, EPOCH_NUMBER)
-        logging.info('Training time: {:10f} minutes'.format((time.time()-starting_time)/60))
-        
-        logging.info("saving the model ..")
-        torch.save(generated_model, MODEL_PATH)
-        logging.info("model saved!")
-        
-        logging.info("visualize generated model ..")
-        visualize_generated_model(mixed_datasets, labels, generated_model)
-        print("closing ..")
-
-    # if iteration = 0 and visualize_prediction is = 1
-    # the script load the model from the path that you choose and
-    # visualize the prediction
-    elif iteration == 0 and visualize_prediction == 1:
-        print("loading of default model from path ..")
-        logging.info("-----------   LOAD MODEL  -----------")
-        logging.info("skipped a new model generation ..")
-        logging.info("loading of default model from path ..")
-        
-        loaded_model = torch.load(MODEL_PATH)
-
-        visualize_generated_model(mixed_datasets, labels, loaded_model)
-        print("closing ..")
+    visualize_generated_model(mixed_datasets, labels, loaded_model)
+    print("closing ..")

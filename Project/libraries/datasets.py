@@ -5,10 +5,12 @@
 ###
 
 import os
+import logging
 
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
+from libraries.dirs import ReturnDirectories
 
 dataset_transformation = {
     'train': transforms.Compose([
@@ -56,3 +58,27 @@ def ImagesDatasetSize(dataset, subs):
     Return the length of the image datasets
     '''
     return {x: len(dataset[x]) for x in subs}
+
+def CreateAndShuffleDatasetFromPath(IMAGE_PATH):
+    """
+    This function create the image dataset and then shuffle them
+    from the default path
+    
+    Return: the datasets, labels, dataset_sizes
+    """
+    
+    SUB_DIRECTORIES = ReturnDirectories(IMAGE_PATH)
+
+    image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRECTORIES)
+    mixed_datasets = ShuffleDatasets(image_datasets, SUB_DIRECTORIES)
+
+    dataset_sizes = ImagesDatasetSize(image_datasets, SUB_DIRECTORIES)
+    mixed_datasets_sizes = ImagesDatasetSize(mixed_datasets, SUB_DIRECTORIES)
+
+    # Extract the labels from one dataset (are equal between them)
+    labels = image_datasets['train'].classes
+
+    logging.debug("dataset sizes: " + str(dataset_sizes))
+    logging.debug("mixed_datasets sizes: " + str(mixed_datasets_sizes))
+
+    return image_datasets, mixed_datasets, labels, dataset_sizes

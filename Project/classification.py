@@ -16,7 +16,7 @@ from libraries.visualizer import imshow
 from libraries.datasets import img_transformation
 from libraries.errors import *
 
-from model import model_generation
+from model import *
 
 plt.ion()   # interactive mode
 
@@ -42,13 +42,16 @@ CheckParametersErrors(option.epochs, option.learning_rate, option.iteration,
 
 if option.iteration == 1:
     print('execution of model generation function')
-    model_generation(option.dataset_images_path, option.model_path, option.iteration, option.visualize_prediction, option.epochs, option.learning_rate)
-else:
+    ModelGeneration(option.dataset_images_path, option.model_path, option.epochs, option.learning_rate)
+elif option.iteration == 0 and option.visualize_prediction == 1:
     print('skip model generation, it loads the model from path and visualize the results')
+    LoadModelVisualization(option.dataset_images_path, option.model_path)
+    exit()
+else:
+    print("loading image classification ..")
 
 
 logging.info("-----------   NEW IMAGE CLASSIFICATION  -----------")
-print("loading image classification ..")
 logging.info("loading image classification ..")
 
 # Load model
