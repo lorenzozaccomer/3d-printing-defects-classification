@@ -1,6 +1,6 @@
 ###
 # 
-#  errors.py
+#  classification.py
 #
 ###
 
@@ -9,7 +9,6 @@ from PIL import Image
 import torch
 import logging
 import argparse
-import os
 import matplotlib.pyplot as plt
 
 # importing Functions from files
