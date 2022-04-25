@@ -38,7 +38,8 @@ print(option)
 labels = ['NoDefects', 'YesDefects']
 
 CheckParametersErrors(option.epochs, option.learning_rate, option.iteration, 
-    option.visualize_prediction, option.test_image_path, option.model_path)
+    option.visualize_prediction, option.test_image_path, 
+    option.model_path, option.dataset_images_path)
 
 if option.iteration == 1:
     print('execution of model generation function')
