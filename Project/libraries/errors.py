@@ -54,12 +54,12 @@ def CheckParametersErrors(EPOCHS, LEARNING_RATE, ITERATION,
         logging.info("NOT ERROR ON YOUR PARAMETER")
 
     
-    logging.debug("ITERATION: " + str(ITERATION))
-    logging.debug("VISUALIZE_PREDICTION: " + str(VISUALIZE_PREDICTION))
-    logging.debug("EPOCHS: " + str(EPOCHS))
-    logging.debug("TEST_IMAGE_PATH: " + TEST_IMAGE_PATH)
-    logging.debug("MODEL_PATH: " + MODEL_PATH)
-    logging.debug("DATASET_IMAGE_PATH: " + DATASET_IMAGE_PATH)
+    logging.info("ITERATION: " + str(ITERATION))
+    logging.info("VISUALIZE_PREDICTION: " + str(VISUALIZE_PREDICTION))
+    logging.info("EPOCHS: " + str(EPOCHS))
+    logging.info("TEST_IMAGE_PATH: " + TEST_IMAGE_PATH)
+    logging.info("MODEL_PATH: " + MODEL_PATH)
+    logging.info("DATASET_IMAGE_PATH: " + DATASET_IMAGE_PATH)
     logging.info("DATASET_SUB_DIRECTORIES: " + str(os.listdir(DATASET_IMAGE_PATH)))
 
 
