@@ -8,7 +8,7 @@ import os
 import logging
 
 def CheckParametersErrors(EPOCHS, LEARNING_RATE, ITERATION,
-     VISUALIZE_PREDICTION, TEST_IMAGE_PATH, MODEL_PATH):
+     VISUALIZE_PREDICTION, TEST_IMAGE_PATH, MODEL_PATH, DATASET_IMAGE_PATH):
     """
     This function check if the user set wrong paramater, in this case
     the script will call the exit() system function and the script will close
@@ -40,6 +40,10 @@ def CheckParametersErrors(EPOCHS, LEARNING_RATE, ITERATION,
     elif not(os.path.exists(MODEL_PATH)):
         print("model path error! this image file doesn't exist")
         logging.debug("MODEL_PATH ERROR")
+        exit()
+    elif not(os.path.isdir(DATASET_IMAGE_PATH)):
+        print("dataset image path error! it not exists")
+        logging.debug("DATASET_IMAGE_PATH ERROR")
         exit()
     else:
         print("not error, you can proceed")
