@@ -1,7 +1,10 @@
-
+###
+# 
+#  errors.py
+#
+###
 
 from PIL import Image
-from numpy import indices
 
 import torch
 import logging
@@ -12,6 +15,8 @@ import matplotlib.pyplot as plt
 # importing Functions from files
 from libraries.visualizer import imshow
 from libraries.datasets import img_transformation
+from libraries.errors import *
+
 from model import model_generation
 
 plt.ion()   # interactive mode
@@ -21,7 +26,7 @@ parser = argparse.ArgumentParser(description='3d Printer Image Classification')
 # Command line arguments
 parser.add_argument('--dataset_images_path', type = str, default = './Images/3d/', help = 'Is the path of your image datasets')
 parser.add_argument('--epochs', type = int, default = 25, help = 'Epoch number')
-parser.add_argument('--image_path_file', type = str, default = './Images\\classification-images\\7.jpg', help = 'Is the path for your test image classification')
+parser.add_argument('--test_image_path', type = str, default = './Images\\classification-images\\7.jpg', help = 'Is the path for your test image classification')
 parser.add_argument('--iteration', type = int, default = 0, help = 'Iteration')
 parser.add_argument('--learning_rate', type = float, default = 0.05, help = 'Learning Rate')
 parser.add_argument('--model_path', type = str, default = './generated_model.pth', help = 'Path of your model')
@@ -32,16 +37,15 @@ print(option)
 
 labels = ['NoDefects', 'YesDefects']
 
+CheckParametersErrors(option.epochs, option.learning_rate, option.iteration, 
+    option.visualize_prediction, option.test_image_path, option.model_path)
+
 if option.iteration == 1:
     print('execution of model generation function')
     model_generation(option.dataset_images_path, option.model_path, option.iteration, option.visualize_prediction, option.epochs, option.learning_rate)
 else:
     print('skip model generation, it loads the model from path and visualize the results')
 
-# check if the image path exists
-if not(os.path.exists(option.image_path_file)):
-    print("path file error! this image file doesn't exist")
-    exit()
 
 logging.info("-----------   NEW IMAGE CLASSIFICATION  -----------")
 print("loading image classification ..")
@@ -52,7 +56,7 @@ evaluation_model = torch.load(option.model_path)
 evaluation_model.eval()
 
 #Load image
-img = Image.open(option.image_path_file)
+img = Image.open(option.test_image_path)
 image = img_transformation(img)
 
 # Carry out inference
@@ -61,7 +65,7 @@ out = evaluation_model(tensor_image)
 
 _, indices = torch.max(out,1)
 
-percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
+percentage = torch.softmax(out, dim=1)[0] * 100
 
 prediction_text = "Prediction: " + labels[indices.item()] + " " + str(percentage[indices].item())
 
@@ -69,3 +73,5 @@ imshow(image, prediction_text)
 
 plt.ioff()
 plt.show()
+
+logging.info("-----------   END IMAGE CLASSIFICATION  -----------")
