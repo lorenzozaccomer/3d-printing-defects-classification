@@ -6,20 +6,18 @@
 ###
 
 import os
+import logging
 
 
-def CheckCurrentPathAndExtractSubPaths(DesiredPath):
+def CheckDirectories(DesiredPath):
     """
-    Check if the path that you have previously set is right,
-    also return the directories on the path,
+    Check if on the path there are directories,
     otherwelse it will terminate the script,
     """
 
-    if not(os.path.isdir(DesiredPath)):
-        print("path error! it not exists")
-        exit()
-    elif not(os.listdir(DesiredPath)):
+    if not(os.listdir(DesiredPath)):
         print("On your path there aren't folders!")
+        logging.debug("NOT DIRECTORIES ERROR")
         exit()
 
-    return DesiredPath, os.listdir(DesiredPath)
+    return os.listdir(DesiredPath)

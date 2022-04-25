@@ -39,21 +39,21 @@ def model_generation(IMAGE_PATH, MODEL_PATH, iteration = 0, visualize_prediction
     its prediction
     """
 
-    Path, Subpaths = CheckCurrentPathAndExtractSubPaths(IMAGE_PATH)
+    SUB_DIRS = CheckDirectories(IMAGE_PATH)
 
     logging.debug("iteration: " + str(iteration))
     logging.debug("visualize_prediction: " + str(visualize_prediction))
     logging.debug("EPOCH_NUMBER: " + str(EPOCH_NUMBER))
     logging.debug("LEARNING_RATE: " + str(LEARNING_RATE))
 
-    logging.info("Path: " + Path)
-    logging.info("Subpaths: " + str(Subpaths))
+    logging.info("IMAGE_PATH: " + IMAGE_PATH)
+    logging.info("SUB_DIRS: " + str(SUB_DIRS))
 
-    image_datasets = ImagesDatasetFromFolders(Path, Subpaths)
+    image_datasets = ImagesDatasetFromFolders(IMAGE_PATH, SUB_DIRS)
 
-    mixed_datasets = ShuffleDatasets(image_datasets, Subpaths)
+    mixed_datasets = ShuffleDatasets(image_datasets, SUB_DIRS)
 
-    dataset_sizes = ImagesDatasetSize(image_datasets, Subpaths)
+    dataset_sizes = ImagesDatasetSize(image_datasets, SUB_DIRS)
 
     # Extract the labels from one dataset (are equal between them)
     labels = image_datasets['train'].classes
