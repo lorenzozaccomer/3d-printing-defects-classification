@@ -77,4 +77,5 @@ imshow(image, prediction_text)
 plt.ioff()
 plt.show()
 
+logging.info(prediction_text)
 logging.info("-----------   END IMAGE CLASSIFICATION  -----------")
