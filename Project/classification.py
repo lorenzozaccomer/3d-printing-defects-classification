@@ -63,10 +63,11 @@ evaluation_model.eval()
 
 #Load image
 img = Image.open(option.test_image_path)
-image = img_transformation(img)
+transformed_image = img_transformation(img)
 
 # Carry out inference
-tensor_image = image.unsqueeze(0)
+tensor_image = transformed_image.unsqueeze(0)
+
 out = evaluation_model(tensor_image)
 
 _, indices = torch.max(out,1)
@@ -75,7 +76,7 @@ percentage = torch.softmax(out, dim=1)[0] * 100
 
 prediction_text = "Prediction: " + labels[indices.item()] + " " + str(percentage[indices].item())
 
-imshow(image, prediction_text)
+imshow(transformed_image, prediction_text)
 
 plt.ioff()
 plt.show()
