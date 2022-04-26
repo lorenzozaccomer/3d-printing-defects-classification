@@ -67,14 +67,16 @@ transformed_image = img_transformation(img)
 
 # Carry out inference
 tensor_image = transformed_image.unsqueeze(0)
-
 out = evaluation_model(tensor_image)
 
 _, indices = torch.max(out,1)
 
-percentage = torch.softmax(out, dim=1)[0] * 100
+percentage = torch.softmax(out, dim=1)[0]*100
 
-prediction_text = "Prediction: " + labels[indices.item()] + " " + str(percentage[indices].item())
+percentage = "{:.5f}".format(percentage[indices].item())
+label = labels[indices.item()]
+
+prediction_text = "Prediction: " + label + " " + str(percentage)
 
 imshow(transformed_image, prediction_text)
 
