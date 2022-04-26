@@ -47,6 +47,7 @@ def ModelGeneration(IMAGE_PATH, MODEL_PATH, EPOCH_NUMBER = 1, LEARNING_RATE = 0.
 
     pretrained_model = models.resnet50(pretrained=True)
     
+    # To reduce training time
     for param in pretrained_model.parameters():
         param.requires_grad = False
 
