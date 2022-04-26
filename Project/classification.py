@@ -20,6 +20,9 @@ from model import *
 
 plt.ion()   # interactive mode
 
+# Remove unwanted log information
+logging.getLogger('PIL').setLevel(logging.WARNING)
+
 parser = argparse.ArgumentParser(description='3d Printer Image Classification')
 
 # Command line arguments
