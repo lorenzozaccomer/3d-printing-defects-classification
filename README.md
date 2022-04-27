@@ -1,1 +1,1 @@
-# 3d-printer-defects-classification
+# 3d-printing-defects-classification
