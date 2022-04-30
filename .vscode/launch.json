@@ -17,7 +17,7 @@
                 "--model_path", "./generated_model.pth",
                 "--iteration", "0", 
                 "--visualize_prediction", "0",
-                "--test_image_path", "./Images\\classification-images\\7.jpg",
+                "--test_image_path", "./Images/classification-images/7.jpg",
                 "--dataset_images_path", "./Images/3d/"]
         }
     ]
