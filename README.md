@@ -9,11 +9,11 @@ Project for Computer Vision course
 
 ### Images
 
-- 3d: the dataset to create the model
-- classification-images: to test your model
+- 3d (folder): the image dataset to create the model
+- classification-images (folder): the image folder to test your model, load your photo here!
 
 ### Project
 
-- libraries folder: container for the other file
-- classification.py: the main to run the code
+- Libraries (folder): container for the other files
+- classification.py: the main file to run the code
 - model.py: contain the code for model generation
