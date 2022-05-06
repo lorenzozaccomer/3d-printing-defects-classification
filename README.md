@@ -1,6 +1,6 @@
 # 3d-printing-defects-classification
 
-Progetto per il corso di visione artificiale
+Project for Computer Vision course
 
 ### Documentation
 
