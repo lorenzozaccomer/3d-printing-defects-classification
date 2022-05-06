@@ -5,7 +5,7 @@ Progetto per il corso di visione artificiale
 ### Documentation
 
 - Project Presentation.pdf
-- Software.pdf: has more information about the software's version and how to install them on your machine
+- Software.pdf: has more information about the software to run this code
 
 ### Images
 
@@ -14,6 +14,6 @@ Progetto per il corso di visione artificiale
 
 ### Project
 
-- libraries folder
-- classification.py
-- model.py
+- libraries folder: container for the other file
+- classification.py: the main to run the code
+- model.py: contain the code for model generation
