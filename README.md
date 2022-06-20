@@ -8,6 +8,8 @@ The model that is generated is saved locally on one's own computer. In addition,
 
 Finally, there is the actual evaluation part, i.e. an evaluation in percentage and textual terms will be produced from an image.
 
+Below there are some information about what you can find on the folders.
+
 ### Documentation
 
 - Project Presentation.pdf
