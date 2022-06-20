@@ -1,6 +1,12 @@
 # 3d-printing-defects-classification
 
-Project for Computer Vision course
+Project for Computer Vision course.
+
+It consists in a convolutional network that is able to determine the defectiveness or otherwise of a 3D printing from an image.
+
+The model that is generated is saved locally on one's own computer. In addition, I have implemented the possibility of modifying the 'technical' parameters of the model via the command line (plus other things), without having to put a hand in the code.
+
+Finally, there is the actual evaluation part, i.e. an evaluation in percentage and textual terms will be produced from an image.
 
 ### Documentation
 
