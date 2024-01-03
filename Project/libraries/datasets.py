@@ -59,6 +59,7 @@ def ImagesDatasetSize(dataset, subs):
     '''
     return {x: len(dataset[x]) for x in subs}
 
+
 def CreateAndShuffleDatasetFromPath(IMAGE_PATH):
     """
     This function create the image dataset and then shuffle them

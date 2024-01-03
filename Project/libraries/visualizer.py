@@ -35,13 +35,13 @@ def visualize_generated_model(loaded_dataset, class_names, model):
 
         _, predicted = torch.max(outputs, 1)
 
-        total += labels.size(0)
+        total   += labels.size(0)
         correct += (predicted == labels).sum().item()
             
         # print images
-        label_text = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
-        predicted_text = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
-        accuracy_text = 'Prediction accuracy: {} %'.format(100 * correct / total)
+        label_text      = 'Label: ' + ' '.join('%s' % class_names[x] for x in labels)
+        predicted_text  = 'Predicted: ' + ' '.join('%s' % class_names[predicted[j]] for j in range(images.size()[0]))
+        accuracy_text   = 'Prediction accuracy: {} %'.format(100 * correct / total)
 
         prediction_text = label_text + '\n' + predicted_text + '\n' + accuracy_text
         
